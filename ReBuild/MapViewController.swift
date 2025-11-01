@@ -25,8 +25,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         // 各コメント地点にピンを立てる
         for loc in commentLocations {
-            let coordinate = CLLocationCoordinate2D(latitude: loc.latitude, longitude: loc.longitude)
-        let pin = RatingAnnotation(coordinate: coordinate, title: "コメント：\(loc.text)", rating: loc.rating)
+            let coordinate = CLLocationCoordinate2D(latitude: loc.latitude, 
+                                                    longitude: loc.longitude)
+            
+        let pin = RatingAnnotation(coordinate: coordinate,
+                                   title: "コメント：\(loc.text)",
+                                   rating: loc.rating)
             mapView.addAnnotation(pin)
         }
     }
