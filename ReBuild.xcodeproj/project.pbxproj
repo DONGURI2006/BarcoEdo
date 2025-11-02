@@ -10,6 +10,7 @@
 		DF0D9FF32EB392BD006F589C /* LINESeedJP_A_OTF_Bd.otf in Resources */ = {isa = PBXBuildFile; fileRef = DF0D9FF22EB392BC006F589C /* LINESeedJP_A_OTF_Bd.otf */; };
 		DF0D9FF52EB392C8006F589C /* LINESeedJP_A_OTF_Rg.otf in Resources */ = {isa = PBXBuildFile; fileRef = DF0D9FF42EB392C8006F589C /* LINESeedJP_A_OTF_Rg.otf */; };
 		DF0D9FF72EB3966F006F589C /* ComentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0D9FF62EB3966E006F589C /* ComentController.swift */; };
+		DF6C458D2EB6F50A00BCFE76 /* Pods_ReBuild.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B063012B82AE56F4AB620994 /* Pods_ReBuild.framework */; };
 		DFBC2F432EAB2FF9002C01EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBC2F422EAB2FF9002C01EF /* AppDelegate.swift */; };
 		DFBC2F452EAB2FF9002C01EF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBC2F442EAB2FF9002C01EF /* SceneDelegate.swift */; };
 		DFBC2F472EAB2FF9002C01EF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBC2F462EAB2FF9002C01EF /* ViewController.swift */; };
@@ -42,6 +43,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B063012B82AE56F4AB620994 /* Pods_ReBuild.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReBuild.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BAB971A82A1438873C9F24D8 /* Pods-ReBuild.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReBuild.debug.xcconfig"; path = "Target Support Files/Pods-ReBuild/Pods-ReBuild.debug.xcconfig"; sourceTree = "<group>"; };
+		CF65F0C40A1C4BCC0AFD09A2 /* Pods-ReBuild.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReBuild.release.xcconfig"; path = "Target Support Files/Pods-ReBuild/Pods-ReBuild.release.xcconfig"; sourceTree = "<group>"; };
 		DF0D9FF22EB392BC006F589C /* LINESeedJP_A_OTF_Bd.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = LINESeedJP_A_OTF_Bd.otf; sourceTree = "<group>"; };
 		DF0D9FF42EB392C8006F589C /* LINESeedJP_A_OTF_Rg.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = LINESeedJP_A_OTF_Rg.otf; sourceTree = "<group>"; };
 		DF0D9FF62EB3966E006F589C /* ComentController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComentController.swift; sourceTree = "<group>"; };
@@ -68,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF6C458D2EB6F50A00BCFE76 /* Pods_ReBuild.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,6 +93,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		26071060FC55483DA23E9FFB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BAB971A82A1438873C9F24D8 /* Pods-ReBuild.debug.xcconfig */,
+				CF65F0C40A1C4BCC0AFD09A2 /* Pods-ReBuild.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		BA48D22098BA04A0D42A6300 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B063012B82AE56F4AB620994 /* Pods_ReBuild.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		DFBC2F362EAB2FF9002C01EF = {
 			isa = PBXGroup;
 			children = (
@@ -95,6 +117,8 @@
 				DFBC2F582EAB2FFC002C01EF /* ReBuildTests */,
 				DFBC2F622EAB2FFC002C01EF /* ReBuildUITests */,
 				DFBC2F402EAB2FF9002C01EF /* Products */,
+				26071060FC55483DA23E9FFB /* Pods */,
+				BA48D22098BA04A0D42A6300 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -152,9 +176,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DFBC2F692EAB2FFC002C01EF /* Build configuration list for PBXNativeTarget "ReBuild" */;
 			buildPhases = (
+				F03202E0248D2CCB3643B85D /* [CP] Check Pods Manifest.lock */,
 				DFBC2F3B2EAB2FF9002C01EF /* Sources */,
 				DFBC2F3C2EAB2FF9002C01EF /* Frameworks */,
 				DFBC2F3D2EAB2FF9002C01EF /* Resources */,
+				D3F13823DE94FF669E728E1E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -272,6 +298,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D3F13823DE94FF669E728E1E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ReBuild/Pods-ReBuild-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ReBuild/Pods-ReBuild-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ReBuild/Pods-ReBuild-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F03202E0248D2CCB3643B85D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ReBuild-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		DFBC2F3B2EAB2FF9002C01EF /* Sources */ = {
@@ -461,12 +529,14 @@
 		};
 		DFBC2F6A2EAB2FFC002C01EF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BAB971A82A1438873C9F24D8 /* Pods-ReBuild.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8GVN98333P;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ReBuild/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "カメラを使用する";
@@ -491,12 +561,14 @@
 		};
 		DFBC2F6B2EAB2FFC002C01EF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CF65F0C40A1C4BCC0AFD09A2 /* Pods-ReBuild.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8GVN98333P;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ReBuild/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "カメラを使用する";

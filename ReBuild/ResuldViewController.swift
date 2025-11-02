@@ -1,4 +1,6 @@
 import UIKit
+import Alamofire
+import SwiftyJSON 
 
 
 struct CommentData: Codable {
@@ -71,49 +73,84 @@ class ResultViewController: UIViewController, UITableViewDelegate {
         }
     
     func fetchCommentsFromServer(for barcode: String) {
-        guard let url = URL(string: "http://192.168.0.84:8080/check?barcode=\(barcode)") else {
-            print("URLエラー")
-            return
-        }
-
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            if let error = error {
-                print("通信エラー: \(error)")
-                return
-            }
-
-            guard let data = data else {
-                print("データがありません")
-                return
-            }
-
-            do {
-                let decoder = JSONDecoder()
-                let result = try decoder.decode(CheckResponse.self, from: data)
-
+        
+        let params: [String: Any] = ["barcode": barcode]
+        
+        AF.request("http://192.168.0.26:8080/check",
+                   method: .post,
+                   parameters: params,
+                   encoding: JSONEncoding.default,
+                   headers: nil)
+        
+        
+        .responseJSON { res in
+            
+            if let data = res.data{
+                let json = JSON(data)
+                print("サーバー応答: \(json)")
+                
+                let exists = json["exists"].boolValue
+                let product = json["product"].stringValue
+                let commentArray = json["comments"].arrayValue
+                
                 DispatchQueue.main.async {
-                    if result.exists {
-                        self.productName = result.product
-                        self.comments = result.comments ?? []
-                        self.NameLabel.text = self.productName ?? "不明"
+                    if exists {
+                        self.productName = product
+                        self.NameLabel.text = product
+                        
+                        self.comments = commentArray.map {
+                            CommentData(
+                                comment: $0["comment"].stringValue,
+                                rating: $0["rating"].intValue,
+                                latitude: $0["latitude"].doubleValue,
+                                longitude: $0["longitude"].doubleValue
+                            )
+                        }
+                        
                     } else {
+                        self.productName = "未登録の商品"
                         self.comments = []
                         self.NameLabel.text = "未登録の商品"
                     }
-
+                    
                     self.CommentView.reloadData()
                     self.updateEmptyState()
-                    print("コメント取得成功 (\(self.comments.count)件)")
-                }
-            } catch {
-                print("JSON解析エラー: \(error)")
-                if let jsonString = String(data: data, encoding: .utf8) {
-                    print("レスポンス内容:\n\(jsonString)")
                 }
             }
+                
         }
-        task.resume()
     }
+    func sendCommentToServer(barcode: String, commentData: CommentData) {
+            guard let product = productName 
+        
+            else {
+                print("商品名がない")
+                return
+            }
+            
+            let params: [String: Any] = [
+                "barcode": barcode,
+                "product": product,
+                "comment": commentData.comment,
+                "rating": commentData.rating,
+                "latitude": commentData.latitude,
+                "longitude": commentData.longitude
+            ]
+            
+            AF.request("http://192.168.0.26:8080/add",
+                       method: .post,
+                       parameters: params,
+                       encoding: JSONEncoding.default,
+                       headers: nil)
+        
+            .responseJSON { res in
+                if let data = res.data{
+                    let json = JSON(data)
+                    print("サーバー応答: \(json)")
+                }
+                        
+            }
+        }
 
     func updateEmptyState() {
             if comments.isEmpty {
@@ -164,66 +201,17 @@ extension ResultViewController: UITableViewDataSource {
 
 extension ResultViewController: ComentControllerDelegate {
     func didAddComment(_ comment: String, rating: Int, latitude: Double?, longitude: Double?) {
-        print("コメント: \(comment) (評価: \(rating))")
-        print("緯度 \(latitude ?? 0)\n経度 \(longitude ?? 0)")
-        
         let newData = CommentData(
             comment: comment,
             rating: rating,
             latitude: latitude ?? 0.0,
             longitude: longitude ?? 0.0
         )
-        
         comments.append(newData)
         CommentView.reloadData()
         
         if let barcode = codeNumber {
             sendCommentToServer(barcode: barcode, commentData: newData)
         }
-    }
-    
-    func sendCommentToServer(barcode: String, commentData: CommentData) {
-        guard let product = productName,
-              let url = URL(string: "http://192.168.0.26:8080/add") else {
-            print("URLエラー")
-            return
-        }
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        let body: [String: Any] = [
-            "barcode": barcode,
-            "product": product,
-            "comment": commentData.comment,
-            "rating": commentData.rating,
-            "latitude": commentData.latitude,
-            "longitude": commentData.longitude
-        ]
-        
-        do {
-            request.httpBody = try JSONSerialization.data(withJSONObject: body)
-        } catch {
-            print("JSON作成エラー: \(error)")
-            return
-        }
-        
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
-                print("通信エラー: \(error)")
-                return
-            }
-            
-            guard let data = data else {
-                print("データがありません")
-                return
-            }
-            
-            if let responseString = String(data: data, encoding: .utf8) {
-                print("サーバー応答: \(responseString)")
-            }
-        }
-        task.resume()
     }
 }

@@ -1,6 +1,8 @@
 import UIKit
 import AVFoundation
 import CoreLocation
+import Alamofire
+import SwiftyJSON
 
 struct postdata: Codable {
     let barcode:Int
@@ -71,23 +73,7 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
         captureSession.startRunning()
     }
     
-    //バーコードを読み取ったとき
-//    func metadataOutput(_ output: AVCaptureMetadataOutput,
-//                        didOutput metadataObjects: [AVMetadataObject],
-//                        from connection: AVCaptureConnection) {
-//        //認識したバーコードを取得
-//        if let metadataObject = metadataObjects.first as? AVMetadataMachineReadableCodeObject,
-//           let stringValue = metadataObject.stringValue {
-//            //カメラを一時停止
-//            captureSession.stopRunning()
-//            
-//            //コードと位置情報をまとめて保存
-//            var dataToSend: [String: Any] = ["code": stringValue]
-//            print("バーコード番号：\(stringValue as Any)")
-//            //次の画面へ値を渡す
-//            performSegue(withIdentifier: "GoResult", sender: dataToSend)
-//        }
-//    }
+    
     func metadataOutput(_ output: AVCaptureMetadataOutput,
                         didOutput metadataObjects: [AVMetadataObject],
                         from connection: AVCaptureConnection) {
@@ -102,31 +88,33 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
     }
 
     func checkBarcodeOnServer(_ barcode: String) {
-        guard let url = URL(string: "http://192.168.0.26:8080/check?barcode=\(barcode)") else {
-            print("URLエラー")
-            return
-        }
-
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            if let error = error {
-                print("通信エラー: \(error)")
-                return
-            }
-
-            guard let data = data else {
-                print("データなし")
-                return
-            }
-
-            do {
-                if let json = try JSONSerialization.jsonObject(with: data) as? [String: Any] {
+            let params: [String: Any] = ["barcode": String(barcode)]
+            
+            // JSONとして送信
+            AF.request("http://192.168.0.26:8080/check",
+                       method: .post,
+                       parameters: params,
+                       encoding: JSONEncoding.default,
+                       headers: nil)
+        
+            .responseJSON { res in
+                
+                if let data = res.data{
+                    
+                    let json = JSON(data)
+                    print("サーバー応答: \(json)")
+                    
+                    let exists = json["exists"].boolValue
+                    let productName = json["product"].stringValue
+                    
                     DispatchQueue.main.async {
-                        if let exists = json["exists"] as? Bool, exists == true {
-                            let productName = json["product"] as? String ?? "不明"
+                        if exists {
+                            
                             let dataToSend: [String: Any] = [
                                 "code": barcode,
                                 "productName": productName
                             ]
+                            
                             print("登録済み: \(productName)")
                             self.performSegue(withIdentifier: "GoResult", sender: dataToSend)
                         } else {
@@ -135,12 +123,8 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
                         }
                     }
                 }
-            } catch {
-                print("JSON解析エラー: \(error)")
             }
         }
-        task.resume()
-    }
     //画面遷移
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "GoResult",
