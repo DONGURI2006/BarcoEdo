@@ -8,7 +8,7 @@ import UIKit
 import CoreLocation
 
 protocol ComentControllerDelegate: AnyObject {
-    func didAddComment(_ comment: String, rating: Int, latitude: Double?, longitude: Double?)
+    func didAddComment(comment: String, rating: Int, latitude: Double?, longitude: Double?)
 }
 
 class ComentController: UIViewController,UITextFieldDelegate, CLLocationManagerDelegate{
@@ -18,6 +18,10 @@ class ComentController: UIViewController,UITextFieldDelegate, CLLocationManagerD
     @IBOutlet weak var valuBtn4: UIButton!
     
     var selectedRating: Int? = nil
+    
+    var codeNumber: String?
+    var productName: String?
+    
     
     //GPSの管理
     let locationManager = CLLocationManager()
@@ -45,8 +49,6 @@ class ComentController: UIViewController,UITextFieldDelegate, CLLocationManagerD
     
     @IBAction func AddBtn(_ sender: Any)
     {
-        let commentText = textField.text ?? ""
-        
         guard let rating = selectedRating else {
             let alert = UIAlertController(title: "評価を選んでください", message: "", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default))
@@ -54,12 +56,40 @@ class ComentController: UIViewController,UITextFieldDelegate, CLLocationManagerD
             return
         }
         
-        let latitude = currentLocation?.latitude
-        let longitude = currentLocation?.longitude
+        // コメント内容と位置情報を取得
+            let commentText = textField.text ?? ""
+            let latitude = currentLocation?.latitude ?? 0.0
+            let longitude = currentLocation?.longitude ?? 0.0
+            let code = codeNumber ?? ""
+            let product = productName ?? ""
+            
+            print(codeNumber)
+            print(productName)
+        
+                let newComment = CommentData(
+                    barcode: code,
+                    productName: product,
+                    comment: commentText,
+                    rating: rating,
+                    latitude: latitude,
+                    longitude: longitude
+                )
+        
+            // Storyboardから CommentMapViewController を生成
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            if let mapVC = storyboard.instantiateViewController(withIdentifier: "CommentMapViewController") as? CommentMapViewController {
                 
-        // デリゲートでコメントと評価を送信
-        delegate?.didAddComment(commentText, rating: rating, latitude: latitude,longitude: longitude)
-        self.dismiss(animated: true, completion: nil)
+                mapVC.codeNumber = code
+                mapVC.productName = product
+                mapVC.comments.append(newComment)          // 新しいコメントを配列に追加
+                mapVC.sendCommentToServer(barcode: code, commentData: newComment) // サーバー送信
+
+                if let nav = navigationController {
+                nav.pushViewController(mapVC, animated: true)
+                } else {
+                    present(mapVC, animated: true)
+                }
+            }
     }
     
     
@@ -74,6 +104,7 @@ class ComentController: UIViewController,UITextFieldDelegate, CLLocationManagerD
             }
         }
     
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -82,13 +113,15 @@ class ComentController: UIViewController,UITextFieldDelegate, CLLocationManagerD
         textField.layer.borderWidth = 1.0
         textField.clipsToBounds = true
         
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-            view.addGestureRecognizer(tapGesture)
-        
-            
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tapGesture)
             
             setupLocation()
+            print("barcode: \(codeNumber ?? "nil")")
+            print("productName: \(productName ?? "nil")")
         }
+    
+    
 
         @objc func dismissKeyboard() {
             view.endEditing(true)

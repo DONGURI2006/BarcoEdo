@@ -16,14 +16,8 @@ class RegisterViewController: UIViewController {
     }
 
     @IBAction func saveButtonTapped(_ sender: UIButton) {
-        guard let code = barcode,
-              let name = productNameField.text,
-              !name.isEmpty 
-        
-        else {
-            showAlert("商品名を入力してください。")
-            return
-        }
+        let code = barcode ?? "未設定バーコード"
+        let name = productNameField.text?.isEmpty == false ? productNameField.text! : "不明な商品"
 
         print("保存: \(code) = \(name)")
         
@@ -34,11 +28,7 @@ class RegisterViewController: UIViewController {
         
             let params: [String: Any] = [
                 "barcode": barcode,
-                "product": productName,
-                "comment": "",
-                "rating": 0,
-                "latitude": 0.0,
-                "longitude": 0.0
+                "product": productName
             ]
             
             AF.request("http://192.168.0.26:8080/add",
@@ -64,20 +54,17 @@ class RegisterViewController: UIViewController {
         }
     
     func showResultView(barcode: String, productName: String) {
-            if let storyboard = storyboard,
-               let resultVC = storyboard.instantiateViewController(withIdentifier: "ResultViewController") as? ResultViewController {
+        if let storyboard = storyboard,
+               let commentVC = storyboard.instantiateViewController(withIdentifier: "ComentController") as? ComentController {
                 
-                resultVC.codeNumber = barcode
-                resultVC.productName = productName
+                commentVC.codeNumber = barcode
+                commentVC.productName = productName
+            
                 
-                // 商品登録直後なのでコメントは空
-                resultVC.comments = []
-                
-                // 画面遷移
                 if let nav = navigationController {
-                    nav.pushViewController(resultVC, animated: true)
+                    nav.pushViewController(commentVC, animated: true)
                 } else {
-                    present(resultVC, animated: true)
+                    present(commentVC, animated: true)
                 }
             }
         }

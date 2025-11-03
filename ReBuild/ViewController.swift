@@ -127,7 +127,7 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
     //画面遷移
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "GoResult",
-            let destination = segue.destination as? ResultViewController,
+            let destination = segue.destination as? CommentMapViewController,
             let data = sender as? [String: Any] {
             destination.codeNumber = data["code"] as? String
             destination.productName = data["productName"] as? String
