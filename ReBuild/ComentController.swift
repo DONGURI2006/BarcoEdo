@@ -11,17 +11,17 @@ protocol ComentControllerDelegate: AnyObject {
     func didAddComment(comment: String, rating: Int, latitude: Double?, longitude: Double?)
 }
 
-class ComentController: UIViewController,UITextFieldDelegate, CLLocationManagerDelegate{
+class ComentController: UIViewController,UITextFieldDelegate, CLLocationManagerDelegate, UITextViewDelegate{
     @IBOutlet weak var valuBtn1: UIButton!
     @IBOutlet weak var valuBtn2: UIButton!
     @IBOutlet weak var valuBtn3: UIButton!
     @IBOutlet weak var valuBtn4: UIButton!
     
+    @IBOutlet weak var TextCountLabel: UILabel!
     var selectedRating: Int? = nil
     
     var codeNumber: String?
     var productName: String?
-    
     
     //GPSの管理
     let locationManager = CLLocationManager()
@@ -38,8 +38,19 @@ class ComentController: UIViewController,UITextFieldDelegate, CLLocationManagerD
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         currentLocation = locations.last?.coordinate
     }
+    func textViewDidChange(_ textView: UITextView) {
+            // 現在の文字数を取得
+            let inputLength = textView.text.count
+            
+            TextCountLabel.text = "\(MaxcomentCount - inputLength)/\(MaxcomentCount)"
+            
+        }
     
     @IBOutlet weak var textField: UITextView!
+    
+    var MaxcomentCount:Int = 312
+    
+    
     weak var delegate: ComentControllerDelegate?
     
     @IBAction func BackBtn(_ sender: Any)
@@ -49,12 +60,24 @@ class ComentController: UIViewController,UITextFieldDelegate, CLLocationManagerD
     
     @IBAction func AddBtn(_ sender: Any)
     {
+        if let textCount = textField.text {
+            let inputLength: Int = textCount.count
+            print(inputLength)
+            if(inputLength > MaxcomentCount){
+                let alert = UIAlertController(title: "文字数が多すぎます", message: "", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default))
+                present(alert, animated: true)
+                return
+            }
+        }
+        
         guard let rating = selectedRating else {
             let alert = UIAlertController(title: "評価を選んでください", message: "", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default))
             present(alert, animated: true)
             return
         }
+        
         
         // コメント内容と位置情報を取得
             let commentText = textField.text ?? ""
@@ -97,17 +120,30 @@ class ComentController: UIViewController,UITextFieldDelegate, CLLocationManagerD
             // 押されたボタンを識別（タグで設定する想定）
             selectedRating = sender.tag
             
+            let buttonColors: [UIColor] = [
+                UIColor(red: 64, green: 140, blue: 82, alpha: 0.5),// valuBtn1
+                UIColor(red: 115, green: 173, blue: 57, alpha: 0.5),// valuBtn2
+                UIColor(red: 209, green: 124, blue: 45, alpha: 0.5),// valuBtn3
+                UIColor(red: 169, green: 44, blue: 25, alpha: 0.5),// valuBtn4
+            ]
+
             // すべてのボタンを配列化して不透明度を変更
             let allButtons = [valuBtn1, valuBtn2, valuBtn3, valuBtn4]
                 for (index, button) in allButtons.enumerated() {
                     guard let button = button else { continue }
-                        // 拡大するボタンかどうかを判定
-                        let isSelected = (index == selectedRating)
-                        UIView.animate(withDuration: 0.2) {
-                            // 1.25倍に拡大する
-                            button.transform = isSelected ? CGAffineTransform(scaleX: 1.25, y: 1.25) : .identity
-                        }
+                    // 拡大するボタンかどうかを判定
+                    let isSelected = (index == selectedRating)
+                    UIView.animate(withDuration: 0.2) {
+                    // 1.25倍に拡大する
+                button.transform = isSelected ? CGAffineTransform(scaleX: 1.25, y: 1.25) : .identity
+                if isSelected {
+                    button.tintColor = buttonColors[index]
+                } else {
+                    button.tintColor = .label  // そのままにする
                 }
+            }
+            }
+
         }
     
     
@@ -115,9 +151,17 @@ class ComentController: UIViewController,UITextFieldDelegate, CLLocationManagerD
     {
         super.viewDidLoad()
         
+        if let textCount = textField.text {
+            let inputLength: Int = textCount.count
+            TextCountLabel.text = "\(MaxcomentCount - inputLength):\(MaxcomentCount)"
+        }
+        
+        
         textField.layer.borderColor = UIColor.black.cgColor
         textField.layer.borderWidth = 1.0
         textField.clipsToBounds = true
+        textField.delegate = self
+        
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tapGesture)
@@ -126,8 +170,6 @@ class ComentController: UIViewController,UITextFieldDelegate, CLLocationManagerD
             print("barcode: \(codeNumber ?? "nil")")
             print("productName: \(productName ?? "nil")")
         }
-    
-    
 
         @objc func dismissKeyboard() {
             view.endEditing(true)

@@ -2,20 +2,30 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class RegisterViewController: UIViewController {
+class RegisterViewController: UIViewController, UITextFieldDelegate {
 
+    @IBOutlet weak var ProducttextCount: UILabel!
     @IBOutlet weak var productNameField: UITextField!
 
     var barcode: String?
+    var MaxCountText:Int = 25
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let textCount = productNameField.text {
+            let inputLength: Int = textCount.count
+            ProducttextCount.text = "\(MaxCountText - inputLength)/\(MaxCountText)"
+        }
+        
+        productNameField.delegate = self
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tapGesture)
     }
 
     @IBAction func saveButtonTapped(_ sender: UIButton) {
+        
         let code = barcode ?? "未設定バーコード"
         let name = productNameField.text?.isEmpty == false ? productNameField.text! : "不明な商品"
 
@@ -23,6 +33,18 @@ class RegisterViewController: UIViewController {
         
         registerProductToServer(barcode: code, productName: name)
     }
+    
+        func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool{
+            let currentText = textField.text ?? ""
+            guard let stringRange = Range(range, in: currentText) else
+            { return true }
+            let textCount = currentText.replacingCharacters(in: stringRange, with: string)
+            
+            let inputLength = textCount.count
+            ProducttextCount.text = "\(MaxCountText - inputLength)/\(MaxCountText)"
+            
+            return inputLength <= MaxCountText
+        }
     
     func registerProductToServer(barcode: String, productName: String) {
         
