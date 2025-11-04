@@ -205,9 +205,10 @@
                                 <rect key="frame" x="67" y="710" width="120" height="50"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="閉じる">
+                                <buttonConfiguration key="configuration" style="filled" title="戻る">
+                                    <backgroundConfiguration key="background" cornerRadius="0.0"/>
                                     <fontDescription key="titleFontDescription" name="LINESeedJPApp_OTF-Regular" family="LINE Seed JP App_OTF" pointSize="16"/>
-                                    <color key="baseBackgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="baseBackgroundColor" red="0.45098042490000001" green="0.6784313917" blue="0.2235293984" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="BackBtn:" destination="grf-ov-i5h" eventType="touchUpInside" id="Alg-P5-DdN"/>
@@ -244,8 +245,9 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="追加する">
+                                    <backgroundConfiguration key="background" cornerRadius="0.0"/>
                                     <fontDescription key="titleFontDescription" name="LINESeedJPApp_OTF-Regular" family="LINE Seed JP App_OTF" pointSize="16"/>
-                                    <color key="baseBackgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="baseBackgroundColor" red="0.45098042490000001" green="0.6784313917" blue="0.2235293984" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="saveButtonTapped:" destination="grf-ov-i5h" eventType="touchUpInside" id="vP9-No-hxT"/>
@@ -355,9 +357,10 @@
                                 <rect key="frame" x="67" y="710" width="120" height="51"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="閉じる">
+                                <buttonConfiguration key="configuration" style="filled" title="戻る">
+                                    <backgroundConfiguration key="background" cornerRadius="0.0"/>
                                     <fontDescription key="titleFontDescription" name="LINESeedJPApp_OTF-Regular" family="LINE Seed JP App_OTF" pointSize="18"/>
-                                    <color key="baseBackgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="baseBackgroundColor" red="0.45098042490000001" green="0.6784313917" blue="0.2235293984" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="BackBtn:" destination="6Sj-LP-eAH" eventType="touchUpInside" id="Yk4-3g-yLO"/>
@@ -368,8 +371,9 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="追加する">
+                                    <backgroundConfiguration key="background" cornerRadius="0.0"/>
                                     <fontDescription key="titleFontDescription" name="LINESeedJPApp_OTF-Regular" family="LINE Seed JP App_OTF" pointSize="18"/>
-                                    <color key="baseBackgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="baseBackgroundColor" red="0.45098042490000001" green="0.6784313917" blue="0.2235293984" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="AddBtn:" destination="6Sj-LP-eAH" eventType="touchUpInside" id="PZo-NG-MkU"/>
