@@ -47,6 +47,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     func updateButtonTitle() {
         let title = isCircle ? "丸" : "四角"
+        
         OnOffBtn.setTitle(title, for: .normal)
     }
     
