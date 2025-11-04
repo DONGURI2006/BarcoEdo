@@ -148,9 +148,9 @@
 				DFBC2F742EAD9374002C01EF /* MapViewController.swift */,
 				DFBC2F4B2EAB2FFC002C01EF /* Assets.xcassets */,
 				DFBC2F4D2EAB2FFC002C01EF /* LaunchScreen.storyboard */,
-				DFBC2F502EAB2FFC002C01EF /* Info.plist */,
 				DF0D9FF42EB392C8006F589C /* LINESeedJP_A_OTF_Rg.otf */,
 				DF0D9FF22EB392BC006F589C /* LINESeedJP_A_OTF_Bd.otf */,
+				DFBC2F502EAB2FFC002C01EF /* Info.plist */,
 			);
 			path = ReBuild;
 			sourceTree = "<group>";

@@ -9,8 +9,8 @@
 	</dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string>LINESeedJP_OTF_Regular.otf</string>
-		<string>LINESeedJP_OTF_Bold.otf</string>
+		<string>LINESeedJP_A_OTF_Rg.otf</string>
+		<string>LINESeedJP_A_OTF_Bd.otf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

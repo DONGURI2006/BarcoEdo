@@ -21,7 +21,7 @@ class ResultViewController: UIViewController, UITableViewDelegate {
             label.textAlignment = .center
             label.numberOfLines = 0
             label.textColor = .black
-            label.font = UIFont.systemFont(ofSize: 16)
+            label.font = UIFont(name: "LINE Seed JP App_OTF Regular", size: 16)
             return label
         }()
     
