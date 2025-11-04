@@ -43,10 +43,6 @@ class ResultViewController: UIViewController, UITableViewDelegate {
         CommentView.backgroundView = comments.isEmpty ? emptyLabel : nil
     }
     
-    @IBAction func BackBtn(_ sender: Any)
-        {
-            self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
-        }
 }
 
 extension ResultViewController: UITableViewDataSource {

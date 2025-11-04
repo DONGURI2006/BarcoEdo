@@ -81,11 +81,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             isCircle.toggle()
         }
     
-    @IBAction func CameraBackBtn(_ sender: Any)
-        {
-            self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
-        }
-    
 }
 
 //どこに,どれくらいの範囲に図形を貼るのか
