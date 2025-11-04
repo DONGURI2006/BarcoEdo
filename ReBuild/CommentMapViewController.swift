@@ -2,6 +2,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON 
 
+
 struct CommentData: Codable {
     let barcode: String
     var productName:String
@@ -26,6 +27,7 @@ class CommentMapViewController: UIViewController {
     
     @IBOutlet weak var commentButton: UIButton!
     @IBOutlet weak var mapButton: UIButton!
+    
     
     var codeNumber: String?
     var productName: String?
@@ -55,7 +57,7 @@ class CommentMapViewController: UIViewController {
         
         let params: [String: Any] = ["barcode": barcode]
         
-        AF.request("http://192.168.0.84:8080/check",
+        AF.request("https://bunri.yusk1450.com/app-pj/barcoedo/check.php",
                    method: .post,
                    parameters: params,
                    encoding: JSONEncoding.default,
@@ -117,7 +119,7 @@ class CommentMapViewController: UIViewController {
             ]
             
             
-            AF.request("http://192.168.0.84:8080/add",
+            AF.request("https://bunri.yusk1450.com/app-pj/barcoedo/add.php",
                        method: .post,
                        parameters: params,
                        encoding: JSONEncoding.default,
@@ -147,7 +149,10 @@ class CommentMapViewController: UIViewController {
             mapVC?.updateMap()
 
         }
-    
+    @IBAction func CameraBackBtn(_ sender: Any)
+        {
+            self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+        }
     @IBAction func commentButtonTapped(_ sender: UIButton) {
         showCommentView()
     }

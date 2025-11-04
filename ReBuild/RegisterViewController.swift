@@ -31,7 +31,7 @@ class RegisterViewController: UIViewController {
                 "product": productName
             ]
             
-            AF.request("http://192.168.0.84:8080/add",
+            AF.request("https://bunri.yusk1450.com/app-pj/barcoedo/add.php",
                        method: .post,
                        parameters: params,
                        encoding: JSONEncoding.default,

@@ -98,6 +98,26 @@
                                     <action selector="mapButtonTapped:" destination="a1f-52-0sm" eventType="touchUpInside" id="Aig-uo-GUs"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="BtnBack" translatesAutoresizingMaskIntoConstraints="NO" id="L3L-bo-6Vq">
+                                <rect key="frame" x="0.0" y="755" width="414" height="141"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="border" translatesAutoresizingMaskIntoConstraints="NO" id="qQC-2T-KAl">
+                                <rect key="frame" x="0.0" y="846" width="414" height="50"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ef-NN-J76">
+                                <rect key="frame" x="154" y="765" width="107" height="73"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="0.45098042490000001" green="0.6784313917" blue="0.2235293984" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="CameraImg" imagePlacement="top" title="新しい商品をスキャン" imagePadding="6">
+                                    <fontDescription key="titleFontDescription" name="LINESeedJPApp_OTF-Bold" family="LINE Seed JP App_OTF" pointSize="8"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="CameraBackBtn:" destination="a1f-52-0sm" eventType="touchUpInside" id="faP-WL-Uec"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Xgu-Wz-JhS"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -112,7 +132,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kFn-hg-pRW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1690" y="-420"/>
+            <point key="canvasLocation" x="1689.8550724637682" y="-420.53571428571428"/>
         </scene>
         <!--Result View Controller-->
         <scene sceneID="IUb-17-Udx">
@@ -149,15 +169,6 @@
                                 <fontDescription key="fontDescription" name="LINESeedJPApp_OTF-Bold" family="LINE Seed JP App_OTF" pointSize="20"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SZc-9n-BKd">
-                                <rect key="frame" x="0.0" y="755" width="414" height="141"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="CameraBtn"/>
-                                <connections>
-                                    <action selector="BackBtn:" destination="pbk-00-2Ew" eventType="touchUpInside" id="KhO-69-UNo"/>
-                                </connections>
-                            </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="border" translatesAutoresizingMaskIntoConstraints="NO" id="ucc-aV-5eh">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
@@ -259,7 +270,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="65W-cQ-kd8">
-                                <rect key="frame" x="0.0" y="180" width="414" height="607"/>
+                                <rect key="frame" x="0.0" y="180" width="414" height="716"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <standardMapConfiguration key="preferredConfiguration"/>
                             </mapView>
@@ -267,15 +278,6 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bul-zL-fZk">
-                                <rect key="frame" x="0.0" y="755" width="414" height="141"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="CameraBtn"/>
-                                <connections>
-                                    <action selector="CameraBackBtn:" destination="gjf-8t-nj0" eventType="touchUpInside" id="kcE-Zl-f3U"/>
-                                </connections>
-                            </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="border" translatesAutoresizingMaskIntoConstraints="NO" id="9fs-UT-Olh">
                                 <rect key="frame" x="0.0" y="846" width="414" height="50"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
@@ -285,8 +287,8 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IKc-Ko-gUd">
-                                <rect key="frame" x="315" y="712" width="79" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="315" y="712" width="78" height="35"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="丸"/>
                                 <connections>
@@ -455,7 +457,8 @@
     <resources>
         <image name="BackCover" width="414" height="610"/>
         <image name="Bar" width="289" height="16"/>
-        <image name="CameraBtn" width="414" height="136"/>
+        <image name="BtnBack" width="413" height="136"/>
+        <image name="CameraImg" width="48.5" height="40"/>
         <image name="FaceIcon1" width="40" height="40"/>
         <image name="FaceIcon2" width="40" height="40"/>
         <image name="FaceIcon3" width="40" height="40"/>

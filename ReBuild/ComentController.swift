@@ -99,9 +99,15 @@ class ComentController: UIViewController,UITextFieldDelegate, CLLocationManagerD
             
             // すべてのボタンを配列化して不透明度を変更
             let allButtons = [valuBtn1, valuBtn2, valuBtn3, valuBtn4]
-            for (index, button) in allButtons.enumerated() {
-                button?.alpha = (index == selectedRating) ? 1.0 : 0.3
-            }
+                for (index, button) in allButtons.enumerated() {
+                    guard let button = button else { continue }
+                        // 拡大するボタンかどうかを判定
+                        let isSelected = (index == selectedRating)
+                        UIView.animate(withDuration: 0.2) {
+                            // 1.25倍に拡大する
+                            button.transform = isSelected ? CGAffineTransform(scaleX: 1.25, y: 1.25) : .identity
+                        }
+                }
         }
     
     
