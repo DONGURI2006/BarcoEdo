@@ -4,12 +4,20 @@ import MapKit
 class MapViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var mapView: MKMapView!
     
+    @IBOutlet weak var OnOffBtn: UIButton!
     @IBOutlet weak var ProductName: UILabel!
     
     var codeNumber: String?
     var productName: String?
     
     var commentLocations: [(latitude: Double, longitude: Double, rating:Int, text:String)] = []
+    
+    var isCircle: Bool = true {
+            didSet {
+                updateButtonTitle()
+                updateMap()
+            }
+        }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +44,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             mapView.addOverlay(overlay)
         }
     }
+    
+    func updateButtonTitle() {
+        let title = isCircle ? "丸" : "四角"
+        OnOffBtn.setTitle(title, for: .normal)
+    }
+    
     func updateMap() {
         guard !commentLocations.isEmpty else {
             return
@@ -57,9 +71,14 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
             if let heatmap = overlay as? MapOverlay {
-                return MapOverlayRenderer(overlay: heatmap)
+                let renderer = MapOverlayRenderer(overlay: heatmap)
+                renderer.isCircle = isCircle
+                return renderer
             }
             return MKOverlayRenderer(overlay: overlay)
+        }
+    @IBAction func OnOffBtnTapped(_ sender: UIButton) {
+            isCircle.toggle()
         }
     
     @IBAction func CameraBackBtn(_ sender: Any)
@@ -91,7 +110,11 @@ class MapOverlay: NSObject, MKOverlay {
 
 //どんな図形を描くか
 class MapOverlayRenderer: MKOverlayRenderer {
+    
+    var isCircle: Bool = true
+    
     override func draw(_ mapRect: MKMapRect, zoomScale: MKZoomScale, in context: CGContext) {
+        
         guard let overlay = overlay as? MapOverlay else { return }
         
         let mapPoint = MKMapPoint(overlay.coordinate)
@@ -119,14 +142,21 @@ class MapOverlayRenderer: MKOverlayRenderer {
         default:
             fillColor = UIColor.gray.withAlphaComponent(0.5)
         }
-        
         //描画領域内なら塗りつぶしをする
         let expandedRect = circleRect.insetBy(dx: -radius, dy: -radius)
         if context.boundingBoxOfClipPath.intersects(expandedRect) {
             context.setFillColor(fillColor.cgColor)
-            context.fillEllipse(in: circleRect)
-//            context.fill(circleRect)
+            
+            if isCircle {
+                //円
+                context.fillEllipse(in: circleRect)
+            } else {
+                //四角
+                context.fill(circleRect)
+            }
+            
         }
+
     }
 }
 

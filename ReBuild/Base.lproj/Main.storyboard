@@ -284,6 +284,15 @@
                                 <rect key="frame" x="52" y="200" width="310" height="23"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IKc-Ko-gUd">
+                                <rect key="frame" x="315" y="712" width="79" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="丸"/>
+                                <connections>
+                                    <action selector="OnOffBtnTapped:" destination="gjf-8t-nj0" eventType="touchUpInside" id="m6k-vP-UM0"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="商品名" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pQm-id-oeU">
                                 <rect key="frame" x="12" y="83" width="166" height="21"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
@@ -297,13 +306,14 @@
                     </view>
                     <navigationItem key="navigationItem" id="Vw1-lQ-V69"/>
                     <connections>
+                        <outlet property="OnOffBtn" destination="IKc-Ko-gUd" id="l14-sz-05Y"/>
+                        <outlet property="ProductName" destination="pQm-id-oeU" id="jM3-wu-On4"/>
                         <outlet property="mapView" destination="65W-cQ-kd8" id="7Cj-6l-Q1E"/>
-                        <outlet property="productName" destination="pQm-id-oeU" id="vFQ-VX-BEE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Ab-lE-qQE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2525" y="-48"/>
+            <point key="canvasLocation" x="2524.6376811594205" y="-48.214285714285715"/>
         </scene>
         <!--Coment Controller-->
         <scene sceneID="jTa-rs-jOM">
