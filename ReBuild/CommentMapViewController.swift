@@ -50,6 +50,7 @@ class CommentMapViewController: UIViewController {
         
         showCommentView()
         print(comments)
+        NewProductName.text = productName
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tapGesture)
