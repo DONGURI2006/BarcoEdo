@@ -5,6 +5,12 @@ import SwiftyJSON
 
 class ResultViewController: UIViewController, UITableViewDelegate {
     
+    @IBOutlet weak var AllBtn: UIButton!
+    
+    @IBOutlet weak var ValueBtn1: UIButton!
+    @IBOutlet weak var ValueBtn2: UIButton!
+    @IBOutlet weak var ValueBtn3: UIButton!
+    @IBOutlet weak var ValueBtn4: UIButton!
     
     var codeNumber: String?
     var productName:String?
@@ -33,6 +39,9 @@ class ResultViewController: UIViewController, UITableViewDelegate {
         CommentView.dataSource = self
         CommentView.delegate = self
         
+        CommentView.rowHeight = UITableView.automaticDimension
+        CommentView.estimatedRowHeight = 60
+        
         updateEmptyState()
         
     }
@@ -50,28 +59,12 @@ extension ResultViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell", for: indexPath)
-        let data = comments[indexPath.row]
-                
-        //コメント
-        cell.textLabel?.text = data.comment
-        cell.textLabel?.font = UIFont.systemFont(ofSize: 14)
-        cell.textLabel?.textColor = .black
-        cell.textLabel?.numberOfLines = 0
-            
-        //アイコン
-        switch data.rating {
-        case 0:
-            cell.imageView?.image = UIImage(named: "FaceIcon1")
-        case 1:
-            cell.imageView?.image = UIImage(named: "FaceIcon2")
-        case 2:
-            cell.imageView?.image = UIImage(named: "FaceIcon3")
-        case 3:
-            cell.imageView?.image = UIImage(named: "FaceIcon4")
-        default:
-            cell.imageView?.image = nil
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell", for: indexPath) as? CommentCell else {
+            return UITableViewCell()
         }
+
+        let data = comments[indexPath.row]
+        cell.configure(with: data)
         return cell
     }
 }

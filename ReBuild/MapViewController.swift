@@ -52,10 +52,14 @@ class MapViewController: UIViewController, MKMapViewDelegate/*, UICollectionView
     
     func updateButtonTitle() {
         let title = isCircle ? "丸" : "四角"
-        
+        let imageName = isCircle ? "Ellipse1" : "Script1"
+
         OnOffBtn.setTitle(title, for: .normal)
+        OnOffBtn.setImage(UIImage(named: imageName), for: .normal)
+
+        OnOffBtn.titleLabel?.font = UIFont(name: "LINE Seed JP App_OTF Regular", size: 8)
+        OnOffBtn.layoutIfNeeded()
     }
-    
     func updateMap() {
         guard !commentLocations.isEmpty else {
             return
@@ -83,6 +87,7 @@ class MapViewController: UIViewController, MKMapViewDelegate/*, UICollectionView
             }
             return MKOverlayRenderer(overlay: overlay)
         }
+    
     @IBAction func OnOffBtnTapped(_ sender: UIButton) {
             isCircle.toggle()
         }

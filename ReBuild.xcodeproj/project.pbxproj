@@ -10,6 +10,7 @@
 		DF0D9FF32EB392BD006F589C /* LINESeedJP_A_OTF_Bd.otf in Resources */ = {isa = PBXBuildFile; fileRef = DF0D9FF22EB392BC006F589C /* LINESeedJP_A_OTF_Bd.otf */; };
 		DF0D9FF52EB392C8006F589C /* LINESeedJP_A_OTF_Rg.otf in Resources */ = {isa = PBXBuildFile; fileRef = DF0D9FF42EB392C8006F589C /* LINESeedJP_A_OTF_Rg.otf */; };
 		DF0D9FF72EB3966F006F589C /* ComentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0D9FF62EB3966E006F589C /* ComentController.swift */; };
+		DF6A8E9D2EBB00FF00456DD3 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6A8E9C2EBB00FF00456DD3 /* CommentCell.swift */; };
 		DF6C458D2EB6F50A00BCFE76 /* Pods_ReBuild.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B063012B82AE56F4AB620994 /* Pods_ReBuild.framework */; };
 		DFA8C0422EB86A470013566C /* CommentMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA8C0412EB86A470013566C /* CommentMapViewController.swift */; };
 		DFBC2F432EAB2FF9002C01EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBC2F422EAB2FF9002C01EF /* AppDelegate.swift */; };
@@ -49,6 +50,7 @@
 		DF0D9FF22EB392BC006F589C /* LINESeedJP_A_OTF_Bd.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = LINESeedJP_A_OTF_Bd.otf; sourceTree = "<group>"; };
 		DF0D9FF42EB392C8006F589C /* LINESeedJP_A_OTF_Rg.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = LINESeedJP_A_OTF_Rg.otf; sourceTree = "<group>"; };
 		DF0D9FF62EB3966E006F589C /* ComentController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComentController.swift; sourceTree = "<group>"; };
+		DF6A8E9C2EBB00FF00456DD3 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		DFA8C0412EB86A470013566C /* CommentMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentMapViewController.swift; sourceTree = "<group>"; };
 		DFBC2F3F2EAB2FF9002C01EF /* ReBuild.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReBuild.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFBC2F422EAB2FF9002C01EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 				DFBC2F482EAB2FF9002C01EF /* Main.storyboard */,
 				DFA8C0412EB86A470013566C /* CommentMapViewController.swift */,
 				DFBC2F722EAC6A29002C01EF /* ResuldViewController.swift */,
+				DF6A8E9C2EBB00FF00456DD3 /* CommentCell.swift */,
 				DFBC2F742EAD9374002C01EF /* MapViewController.swift */,
 				DFBC2F4B2EAB2FFC002C01EF /* Assets.xcassets */,
 				DFBC2F4D2EAB2FFC002C01EF /* LaunchScreen.storyboard */,
@@ -353,6 +356,7 @@
 				DFBC2F752EAD9374002C01EF /* MapViewController.swift in Sources */,
 				DFBC2F732EAC6A29002C01EF /* ResuldViewController.swift in Sources */,
 				DF0D9FF72EB3966F006F589C /* ComentController.swift in Sources */,
+				DF6A8E9D2EBB00FF00456DD3 /* CommentCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
