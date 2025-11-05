@@ -90,8 +90,7 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
     func checkBarcodeOnServer(_ barcode: String) {
             let params: [String: Any] = ["barcode": String(barcode)]
             
-            AF.request("http://192.168.0.84:8080/check",
-//                "https://bunri.yusk1450.com/app-pj/barcoedo/check.php",
+            AF.request("https://bunri.yusk1450.com/app-pj/barcoedo/check.php",
                        method: .post,
                        parameters: params,
                        encoding: JSONEncoding.default,
@@ -131,8 +130,7 @@ func NewBarcode(_ barcode: String) {
         "barcode": barcode,
         "product": ""
     ]
-    AF.request("http://192.168.0.84:8080/add",
-//                "https://bunri.yusk1450.com/app-pj/barcoedo/add.php",
+    AF.request("https://bunri.yusk1450.com/app-pj/barcoedo/add.php",
                 method: .post,
                 parameters: params,
                 encoding: JSONEncoding.default,

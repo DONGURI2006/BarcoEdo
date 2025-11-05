@@ -185,7 +185,7 @@ class ComentController: UIViewController,UITextFieldDelegate, CLLocationManagerD
         
         if let textCount = textField.text {
             let inputLength: Int = textCount.count
-            TextCountLabel.text = "\(MaxcomentCount - inputLength):\(MaxcomentCount)"
+            TextCountLabel.text = "\(MaxcomentCount - inputLength)/\(MaxcomentCount)"
         }
         
         

@@ -55,6 +55,25 @@ class CommentMapViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tapGesture)
         
+        NewProductName.addTarget(self, action: #selector(productNameChanged(_:)), for: .editingChanged)
+        
+    }
+    
+    @objc func productNameChanged(_ textField: UITextField) {
+        let newName = textField.text ?? ""
+        productName = newName
+        
+        comments = comments.map { comment in
+            var updated = comment
+            updated.productName = newName
+            return updated
+        }
+        updateEmbeddedControllers()
+        
+        print(newName)
+        if let code = codeNumber {
+            NewProductToServer(barcode: code,product: newName)
+        }
     }
     
     
@@ -62,8 +81,7 @@ class CommentMapViewController: UIViewController {
         
         let params: [String: Any] = ["barcode": barcode]
         
-        AF.request("http://192.168.0.84:8080/check",
-//            "https://bunri.yusk1450.com/app-pj/barcoedo/check.php,"
+        AF.request("https://bunri.yusk1450.com/app-pj/barcoedo/check.php",
                    method: .post,
                    parameters: params,
                    encoding: JSONEncoding.default,
@@ -105,7 +123,25 @@ class CommentMapViewController: UIViewController {
                 
         }
     }
+    func NewProductToServer(barcode: String,product:String){
+        let params: [String: Any] = [
+            "barcode": barcode,
+            "product": product
+        ]
+        AF.request("https://bunri.yusk1450.com/app-pj/barcoedo/add.php",
+                   method: .post,
+                   parameters: params,
+                   encoding: JSONEncoding.default,
+                   headers: nil)
     
+        .responseJSON { res in
+            if let data = res.data{
+                let json = JSON(data)
+                print("サーバー応答: \(json)")
+            }
+                    
+        }
+    }
     
     func sendCommentToServer(barcode: String, commentData: CommentData) {
             guard let product = productName
@@ -125,8 +161,7 @@ class CommentMapViewController: UIViewController {
             ]
             
             
-            AF.request("http://192.168.0.84:8080/add",
-//                "https://bunri.yusk1450.com/app-pj/barcoedo/add.php",
+            AF.request("https://bunri.yusk1450.com/app-pj/barcoedo/add.php",
                        method: .post,
                        parameters: params,
                        encoding: JSONEncoding.default,
@@ -206,6 +241,7 @@ class CommentMapViewController: UIViewController {
             }
 
         }
+    
     
     @objc func dismissKeyboard() {
         view.endEditing(true)

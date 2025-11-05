@@ -1,7 +1,15 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController, MKMapViewDelegate {
+class MapViewController: UIViewController, MKMapViewDelegate/*, UICollectionViewDataSource*/{
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        <#code#>
+//    }
+//    
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        <#code#>
+//    }
+    
     @IBOutlet weak var mapView: MKMapView!
     
     @IBOutlet weak var OnOffBtn: UIButton!
@@ -23,7 +31,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 
         print("こここ\(commentLocations)")
         mapView.delegate = self
-        
         
         guard !commentLocations.isEmpty else { return }
         
