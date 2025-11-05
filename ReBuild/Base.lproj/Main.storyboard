@@ -26,19 +26,19 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="BackCover" translatesAutoresizingMaskIntoConstraints="NO" id="lil-S6-74M">
-                                <rect key="frame" x="0.0" y="139" width="414" height="619"/>
+                                <rect key="frame" x="0.0" y="139" width="414" height="611"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cgT-AY-iqg">
-                                <rect key="frame" x="0.0" y="296" width="414" height="305"/>
+                                <rect key="frame" x="0.0" y="292" width="414" height="309"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="枠の中に商品のバーコードを入れてください。" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B4A-wZ-dGC">
-                                <rect key="frame" x="0.0" y="781" width="414" height="26"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="枠の中に商品のバーコードを入れてください。" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B4A-wZ-dGC">
+                                <rect key="frame" x="52" y="630" width="311" height="95"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="LINESeedJPApp_OTF-Regular" family="LINE Seed JP App_OTF" pointSize="16"/>
-                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" name="LINESeedJPApp_OTF-Regular" family="LINE Seed JP App_OTF" pointSize="24"/>
+                                <color key="textColor" red="0.2235293984" green="0.2823529541" blue="0.40000003579999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -46,13 +46,12 @@
                     </view>
                     <connections>
                         <outlet property="previewView" destination="cgT-AY-iqg" id="Eh0-UU-6l8"/>
-                        <segue destination="grf-ov-i5h" kind="presentation" identifier="GoRegister" id="d1E-FW-XAq"/>
-                        <segue destination="a1f-52-0sm" kind="show" identifier="GoResult" id="j5o-rC-yMI"/>
+                        <segue destination="6Sj-LP-eAH" kind="presentation" identifier="GoResult" id="p1l-15-KR2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-646.37681159420299" y="166.74107142857142"/>
+            <point key="canvasLocation" x="-413.04347826086962" y="-224.33035714285714"/>
         </scene>
         <!--Comment Map View Controller-->
         <scene sceneID="H3e-Cz-jNJ">
@@ -82,7 +81,7 @@
                                 <fontDescription key="fontDescription" name="LINESeedJPApp_OTF-Regular" family="LINE Seed JP App_OTF" pointSize="16"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="コメント一覧">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleColor" red="0.2235293984" green="0.2823529541" blue="0.40000003579999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <connections>
                                     <action selector="commentButtonTapped:" destination="a1f-52-0sm" eventType="touchUpInside" id="f4O-cG-TRd"/>
@@ -94,7 +93,7 @@
                                 <fontDescription key="fontDescription" name="LINESeedJPApp_OTF-Regular" family="LINE Seed JP App_OTF" pointSize="16"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="マップ">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleColor" red="0.2235293984" green="0.2823529541" blue="0.40000003579999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <connections>
                                     <action selector="mapButtonTapped:" destination="a1f-52-0sm" eventType="touchUpInside" id="Aig-uo-GUs"/>
@@ -120,12 +119,24 @@
                                     <action selector="CameraBackBtn:" destination="a1f-52-0sm" eventType="touchUpInside" id="faP-WL-Uec"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aQ9-a0-Qrh">
+                                <rect key="frame" x="5" y="74" width="404" height="35"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" name="LINESeedJPApp_OTF-Regular" family="LINE Seed JP App_OTF" pointSize="16"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="ehe-DW-abc" id="qBU-ig-Ree"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Xgu-Wz-JhS"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="Exb-Fu-one"/>
                     <connections>
+                        <outlet property="NewProductName" destination="aQ9-a0-Qrh" id="L0N-bm-y7n"/>
                         <outlet property="commentButton" destination="HS8-Wh-J8j" id="R2Q-wa-l8a"/>
                         <outlet property="commentContainer" destination="ehe-DW-abc" id="BLQ-t1-YZ6"/>
                         <outlet property="mapButton" destination="Dso-2R-jsf" id="a9b-Ky-bV7"/>
@@ -134,7 +145,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kFn-hg-pRW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1688" y="-224"/>
+            <point key="canvasLocation" x="1686.9565217391305" y="-224.33035714285714"/>
         </scene>
         <!--Result View Controller-->
         <scene sceneID="IUb-17-Udx">
@@ -165,12 +176,6 @@
                                     <outlet property="dataSource" destination="pbk-00-2Ew" id="4c4-SQ-YTc"/>
                                 </connections>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="商品名" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sgr-Hc-Vvv">
-                                <rect key="frame" x="12" y="83" width="390" height="20"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="LINESeedJPApp_OTF-Bold" family="LINE Seed JP App_OTF" pointSize="20"/>
-                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="border" translatesAutoresizingMaskIntoConstraints="NO" id="ucc-aV-5eh">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
@@ -186,101 +191,11 @@
                     <navigationItem key="navigationItem" id="e2n-Fm-jjh"/>
                     <connections>
                         <outlet property="CommentView" destination="04P-mN-YE6" id="9RV-vd-siq"/>
-                        <outlet property="NameLabel" destination="Sgr-Hc-Vvv" id="QEk-wT-H0t"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iH7-fQ-bsa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2825" y="123"/>
-        </scene>
-        <!--Register View Controller-->
-        <scene sceneID="dBp-3y-x9G">
-            <objects>
-                <viewController modalPresentationStyle="fullScreen" id="grf-ov-i5h" customClass="RegisterViewController" customModule="ReBuild" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="P5F-iJ-IRw">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JuU-Ej-OPl">
-                                <rect key="frame" x="67" y="710" width="120" height="50"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="戻る">
-                                    <backgroundConfiguration key="background" cornerRadius="0.0"/>
-                                    <fontDescription key="titleFontDescription" name="LINESeedJPApp_OTF-Regular" family="LINE Seed JP App_OTF" pointSize="16"/>
-                                    <color key="baseBackgroundColor" red="0.45098042490000001" green="0.6784313917" blue="0.2235293984" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="BackBtn:" destination="grf-ov-i5h" eventType="touchUpInside" id="Alg-P5-DdN"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="商品名登録" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l3V-3f-sOe">
-                                <rect key="frame" x="62" y="124" width="291" height="31"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" name="LINESeedJPApp_OTF-Bold" family="LINE Seed JP App_OTF" pointSize="24"/>
-                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </label>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9he-5c-Xgw">
-                                <rect key="frame" x="63" y="303" width="280" height="35"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
-                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" name="LINESeedJPApp_OTF-Regular" family="LINE Seed JP App_OTF" pointSize="16"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="grf-ov-i5h" id="jkh-cA-D8Q"/>
-                                </connections>
-                            </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pOO-se-KDM">
-                                <rect key="frame" x="108" y="201" width="214" height="46"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                <string key="text">この商品は登録されていません。
-商品名を登録してください。</string>
-                                <fontDescription key="fontDescription" name="LINESeedJPApp_OTF-Regular" family="LINE Seed JP App_OTF" pointSize="14"/>
-                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XGI-Sj-16i">
-                                <rect key="frame" x="227" y="710" width="120" height="50"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="追加する">
-                                    <backgroundConfiguration key="background" cornerRadius="0.0"/>
-                                    <fontDescription key="titleFontDescription" name="LINESeedJPApp_OTF-Regular" family="LINE Seed JP App_OTF" pointSize="16"/>
-                                    <color key="baseBackgroundColor" red="0.45098042490000001" green="0.6784313917" blue="0.2235293984" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="saveButtonTapped:" destination="grf-ov-i5h" eventType="touchUpInside" id="vP9-No-hxT"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dUk-Xi-6d9">
-                                <rect key="frame" x="99" y="346" width="244" height="21"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="LINESeedJPApp_OTF-Regular" family="LINE Seed JP App_OTF" pointSize="10"/>
-                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="border" translatesAutoresizingMaskIntoConstraints="NO" id="0JI-9g-vFE">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="border" translatesAutoresizingMaskIntoConstraints="NO" id="YzE-N3-qKY">
-                                <rect key="frame" x="0.0" y="846" width="414" height="50"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="giN-D7-cHu"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="TjE-G5-tGr"/>
-                    <connections>
-                        <outlet property="ProducttextCount" destination="dUk-Xi-6d9" id="vVC-nE-k8U"/>
-                        <outlet property="productNameField" destination="9he-5c-Xgw" id="vkK-PW-9rP"/>
-                        <segue destination="6Sj-LP-eAH" kind="show" id="cgh-rD-SPO"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="9Y1-Yc-rGG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="234.78260869565219" y="474.77678571428567"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="hKt-of-q7Y">
@@ -307,20 +222,6 @@
                                 <rect key="frame" x="52" y="200" width="310" height="23"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pQm-id-oeU">
-                                <rect key="frame" x="12" y="83" width="166" height="21"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <attributedString key="attributedText">
-                                    <fragment content="商品名">
-                                        <attributes>
-                                            <color key="NSColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <font key="NSFont" size="20" name="LINESeedJPApp_OTF-Bold"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IKc-Ko-gUd">
                                 <rect key="frame" x="330" y="231" width="64" height="64"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
@@ -348,7 +249,6 @@
                     <navigationItem key="navigationItem" id="Vw1-lQ-V69"/>
                     <connections>
                         <outlet property="OnOffBtn" destination="IKc-Ko-gUd" id="l14-sz-05Y"/>
-                        <outlet property="ProductName" destination="pQm-id-oeU" id="jM3-wu-On4"/>
                         <outlet property="mapView" destination="65W-cQ-kd8" id="7Cj-6l-Q1E"/>
                     </connections>
                 </viewController>
@@ -394,19 +294,19 @@
                                 <rect key="frame" x="41" y="363" width="116" height="18"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="LINESeedJPApp_OTF-Regular" family="LINE Seed JP App_OTF" pointSize="12"/>
-                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" red="0.2235293984" green="0.2823529541" blue="0.40000003579999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="この商品はいかがでしたか？" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jpC-QT-8mP">
-                                <rect key="frame" x="86" y="92" width="242" height="18"/>
+                                <rect key="frame" x="43" y="112" width="328" height="24"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="LINESeedJPApp_OTF-Bold" family="LINE Seed JP App_OTF" pointSize="16"/>
-                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" name="LINESeedJPApp_OTF-Bold" family="LINE Seed JP App_OTF" pointSize="22"/>
+                                <color key="textColor" red="0.2235293984" green="0.2823529541" blue="0.40000003579999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="評価" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ua1-Ts-MR3">
                                 <rect key="frame" x="41" y="189" width="49" height="19"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="LINESeedJPApp_OTF-Regular" family="LINE Seed JP App_OTF" pointSize="12"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" red="0.2235293984" green="0.2823529541" blue="0.40000003579999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Bar" translatesAutoresizingMaskIntoConstraints="NO" id="LyO-N2-ag9">
@@ -440,7 +340,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aed-qD-Fx7">
-                                <rect key="frame" x="257" y="216" width="50" height="51"/>
+                                <rect key="frame" x="257" y="215" width="50" height="51"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="FaceIcon4">
@@ -453,7 +353,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xNY-Jh-FVm">
-                                <rect key="frame" x="207" y="216" width="50" height="51"/>
+                                <rect key="frame" x="207" y="215" width="50" height="51"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="FaceIcon3">
@@ -489,34 +389,44 @@
                                 <rect key="frame" x="0.0" y="846" width="414" height="50"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jZr-Yz-wQJ">
+                                <rect key="frame" x="238" y="69" width="176" height="22"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="レビューを見る" image="ComentMark">
+                                    <color key="titleColor" red="0.45098042490000001" green="0.6784313917" blue="0.2235293984" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
+                                <connections>
+                                    <action selector="GoResultBtn:" destination="6Sj-LP-eAH" eventType="touchUpInside" id="oqS-wv-MxE"/>
+                                    <segue destination="a1f-52-0sm" kind="presentation" id="Tb8-gf-1et"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Kcw-Zc-UhD"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                     <navigationItem key="navigationItem" id="tic-dJ-TRc"/>
                     <connections>
+                        <outlet property="GoResult" destination="jZr-Yz-wQJ" id="YQI-jL-UDc"/>
                         <outlet property="TextCountLabel" destination="Zl7-6u-r2f" id="rJx-qG-1FX"/>
                         <outlet property="textField" destination="yzc-pS-H4c" id="zKa-nH-fsM"/>
                         <outlet property="valuBtn1" destination="hTe-Ek-u39" id="n86-x5-1Ug"/>
                         <outlet property="valuBtn2" destination="2Bp-0T-Cjw" id="ieE-xo-Zwu"/>
                         <outlet property="valuBtn3" destination="xNY-Jh-FVm" id="IA4-8u-3PP"/>
                         <outlet property="valuBtn4" destination="aed-qD-Fx7" id="2us-GF-FgP"/>
-                        <segue destination="a1f-52-0sm" kind="show" identifier="GoResultComment" id="Mhz-ut-wGx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="stZ-ft-ho4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="947.82608695652186" y="474.77678571428567"/>
+            <point key="canvasLocation" x="740.57971014492762" y="-224.33035714285714"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="Mhz-ut-wGx"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <image name="BackCover" width="414" height="610"/>
         <image name="Bar" width="289" height="16"/>
         <image name="BtnBack" width="413" height="136"/>
         <image name="CameraImg" width="48.5" height="40"/>
+        <image name="ComentMark" width="21" height="17.5"/>
         <image name="Ellipse1" width="46.5" height="37.5"/>
         <image name="FaceIcon1" width="40" height="40"/>
         <image name="FaceIcon2" width="40" height="40"/>

@@ -12,7 +12,6 @@ class ResultViewController: UIViewController, UITableViewDelegate {
     var longitude: Double?
     var comments: [CommentData] = []
 
-    @IBOutlet weak var NameLabel: UILabel!
     @IBOutlet weak var CommentView: UITableView!
     
     private let emptyLabel: UILabel = {
@@ -30,7 +29,6 @@ class ResultViewController: UIViewController, UITableViewDelegate {
         
         print("商品名：\(self.productName as Any)")
         
-        NameLabel.text = productName ?? "なし"
         
         CommentView.dataSource = self
         CommentView.delegate = self

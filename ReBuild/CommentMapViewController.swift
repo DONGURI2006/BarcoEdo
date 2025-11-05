@@ -28,6 +28,7 @@ class CommentMapViewController: UIViewController {
     @IBOutlet weak var commentButton: UIButton!
     @IBOutlet weak var mapButton: UIButton!
     
+    @IBOutlet weak var NewProductName: UITextField!
     
     var codeNumber: String?
     var productName: String?
@@ -50,6 +51,9 @@ class CommentMapViewController: UIViewController {
         showCommentView()
         print(comments)
         
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tapGesture)
+        
     }
     
     
@@ -57,7 +61,8 @@ class CommentMapViewController: UIViewController {
         
         let params: [String: Any] = ["barcode": barcode]
         
-        AF.request("https://bunri.yusk1450.com/app-pj/barcoedo/check.php",
+        AF.request("http://192.168.0.84:8080/check",
+//            "https://bunri.yusk1450.com/app-pj/barcoedo/check.php,"
                    method: .post,
                    parameters: params,
                    encoding: JSONEncoding.default,
@@ -119,7 +124,8 @@ class CommentMapViewController: UIViewController {
             ]
             
             
-            AF.request("https://bunri.yusk1450.com/app-pj/barcoedo/add.php",
+            AF.request("http://192.168.0.84:8080/add",
+//                "https://bunri.yusk1450.com/app-pj/barcoedo/add.php",
                        method: .post,
                        parameters: params,
                        encoding: JSONEncoding.default,
@@ -138,7 +144,6 @@ class CommentMapViewController: UIViewController {
     func updateEmbeddedControllers() {
             resultVC?.productName = productName
             resultVC?.comments = comments
-            resultVC?.NameLabel.text = productName
             resultVC?.CommentView.reloadData()
             
             mapVC?.productName = productName
@@ -200,4 +205,8 @@ class CommentMapViewController: UIViewController {
             }
 
         }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }

@@ -90,7 +90,8 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
     func checkBarcodeOnServer(_ barcode: String) {
             let params: [String: Any] = ["barcode": String(barcode)]
             
-            AF.request("https://bunri.yusk1450.com/app-pj/barcoedo/check.php",
+            AF.request("http://192.168.0.84:8080/check",
+//                "https://bunri.yusk1450.com/app-pj/barcoedo/check.php",
                        method: .post,
                        parameters: params,
                        encoding: JSONEncoding.default,
@@ -118,25 +119,51 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
                             self.performSegue(withIdentifier: "GoResult", sender: dataToSend)
                         } else {
                             print("未登録バーコード: \(barcode)")
-                            self.performSegue(withIdentifier: "GoRegister", sender: barcode)
+                            self.NewBarcode(barcode)
                         }
                     }
                 }
             }
         }
+    
+func NewBarcode(_ barcode: String) {
+    let params: [String: Any] = [
+        "barcode": barcode,
+        "product": ""
+    ]
+    AF.request("http://192.168.0.84:8080/add",
+//                "https://bunri.yusk1450.com/app-pj/barcoedo/add.php",
+                method: .post,
+                parameters: params,
+                encoding: JSONEncoding.default,
+                headers: nil)
+        
+        .responseJSON { res in
+                
+            if let data = res.data{
+                    
+                _ = JSON(data)
+                    
+                DispatchQueue.main.async {
+                    
+                    let dataToSend: [String: Any] = [
+                        "code": barcode,
+                        "productName": ""
+                    ]
+                    self.performSegue(withIdentifier: "GoResult", sender: dataToSend)
+                }
+            }
+        }
+    }
+    
     //画面遷移
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "GoResult",
-            let destination = segue.destination as? CommentMapViewController,
+            let destination = segue.destination as? ComentController,
             let data = sender as? [String: Any] {
             destination.codeNumber = data["code"] as? String
             destination.productName = data["productName"] as? String
         }
-            else if segue.identifier == "GoRegister",
-                let destination = segue.destination as? RegisterViewController,
-                let barcode = sender as? String {
-                destination.barcode = barcode
-            }
     }
 
     //カメラが見つからないときはポップアップで表示

@@ -5,7 +5,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var mapView: MKMapView!
     
     @IBOutlet weak var OnOffBtn: UIButton!
-    @IBOutlet weak var ProductName: UILabel!
     
     var codeNumber: String?
     var productName: String?
@@ -23,7 +22,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         super.viewDidLoad()
 
         print("こここ\(commentLocations)")
-        ProductName.text = productName
         mapView.delegate = self
         
         

@@ -17,6 +17,7 @@ class ComentController: UIViewController,UITextFieldDelegate, CLLocationManagerD
     @IBOutlet weak var valuBtn3: UIButton!
     @IBOutlet weak var valuBtn4: UIButton!
     
+    @IBOutlet weak var GoResult: UIButton!
     @IBOutlet weak var TextCountLabel: UILabel!
     var selectedRating: Int? = nil
     
@@ -48,7 +49,7 @@ class ComentController: UIViewController,UITextFieldDelegate, CLLocationManagerD
     
     @IBOutlet weak var textField: UITextView!
     
-    var MaxcomentCount:Int = 312
+    var MaxcomentCount:Int = 220
     
     
     weak var delegate: ComentControllerDelegate?
@@ -58,6 +59,26 @@ class ComentController: UIViewController,UITextFieldDelegate, CLLocationManagerD
         self.dismiss(animated: true, completion: nil)
     }
     
+    
+    @IBAction func GoResultBtn(_ sender: Any) {
+        // バーコードと商品名を取得
+        let code = codeNumber ?? ""
+        let product = productName ?? ""
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let mapVC = storyboard.instantiateViewController(withIdentifier: "CommentMapViewController") as? CommentMapViewController {
+            
+            mapVC.codeNumber = code
+            mapVC.productName = product
+            
+            if let nav = navigationController {
+                nav.pushViewController(mapVC, animated: true)
+            } else {
+                present(mapVC, animated: true)
+            }
+        }
+    }
+
     @IBAction func AddBtn(_ sender: Any)
     {
         if let textCount = textField.text {
@@ -65,6 +86,17 @@ class ComentController: UIViewController,UITextFieldDelegate, CLLocationManagerD
             print(inputLength)
             if(inputLength > MaxcomentCount){
                 let alert = UIAlertController(title: "文字数が多すぎます", message: "", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default))
+                present(alert, animated: true)
+                return
+            }
+        }
+        
+        if let textCount = textField.text {
+            let inputLength: Int = textCount.count
+            print(inputLength)
+            if(inputLength == 0){
+                let alert = UIAlertController(title: "コメントを入力してください", message: "", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .default))
                 present(alert, animated: true)
                 return
@@ -98,14 +130,14 @@ class ComentController: UIViewController,UITextFieldDelegate, CLLocationManagerD
                     longitude: longitude
                 )
         
-            // Storyboardから CommentMapViewController を生成
+        // Storyboardから CommentMapViewController を生成
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
             if let mapVC = storyboard.instantiateViewController(withIdentifier: "CommentMapViewController") as? CommentMapViewController {
                 
                 mapVC.codeNumber = code
                 mapVC.productName = product
-                mapVC.comments.append(newComment)          // 新しいコメントを配列に追加
-                mapVC.sendCommentToServer(barcode: code, commentData: newComment) // サーバー送信
+                mapVC.comments.append(newComment)
+                mapVC.sendCommentToServer(barcode: code, commentData: newComment)
 
                 if let nav = navigationController {
                 nav.pushViewController(mapVC, animated: true)

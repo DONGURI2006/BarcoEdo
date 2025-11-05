@@ -23,7 +23,6 @@
 		DFBC2F662EAB2FFC002C01EF /* ReBuildUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBC2F652EAB2FFC002C01EF /* ReBuildUITestsLaunchTests.swift */; };
 		DFBC2F732EAC6A29002C01EF /* ResuldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBC2F722EAC6A29002C01EF /* ResuldViewController.swift */; };
 		DFBC2F752EAD9374002C01EF /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBC2F742EAD9374002C01EF /* MapViewController.swift */; };
-		DFBC2F772EAE77EC002C01EF /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBC2F762EAE77EC002C01EF /* RegisterViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,7 +65,6 @@
 		DFBC2F652EAB2FFC002C01EF /* ReBuildUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReBuildUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		DFBC2F722EAC6A29002C01EF /* ResuldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResuldViewController.swift; sourceTree = "<group>"; };
 		DFBC2F742EAD9374002C01EF /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
-		DFBC2F762EAE77EC002C01EF /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,7 +141,6 @@
 				DFBC2F462EAB2FF9002C01EF /* ViewController.swift */,
 				DFBC2F482EAB2FF9002C01EF /* Main.storyboard */,
 				DFA8C0412EB86A470013566C /* CommentMapViewController.swift */,
-				DFBC2F762EAE77EC002C01EF /* RegisterViewController.swift */,
 				DFBC2F722EAC6A29002C01EF /* ResuldViewController.swift */,
 				DFBC2F742EAD9374002C01EF /* MapViewController.swift */,
 				DFBC2F4B2EAB2FFC002C01EF /* Assets.xcassets */,
@@ -353,7 +350,6 @@
 				DFA8C0422EB86A470013566C /* CommentMapViewController.swift in Sources */,
 				DFBC2F432EAB2FF9002C01EF /* AppDelegate.swift in Sources */,
 				DFBC2F452EAB2FF9002C01EF /* SceneDelegate.swift in Sources */,
-				DFBC2F772EAE77EC002C01EF /* RegisterViewController.swift in Sources */,
 				DFBC2F752EAD9374002C01EF /* MapViewController.swift in Sources */,
 				DFBC2F732EAC6A29002C01EF /* ResuldViewController.swift in Sources */,
 				DF0D9FF72EB3966F006F589C /* ComentController.swift in Sources */,
