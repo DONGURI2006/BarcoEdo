@@ -5,6 +5,7 @@ import SwiftyJSON
 
 class ResultViewController: UIViewController, UITableViewDelegate {
     
+    
     @IBOutlet weak var AllBtn: UIButton!
     
     @IBOutlet weak var ValueBtn1: UIButton!
@@ -19,6 +20,8 @@ class ResultViewController: UIViewController, UITableViewDelegate {
 
     var comments: [CommentData] = []
     var filteredComments: [CommentData] = []
+    
+    var expandedIndexPaths: Set<IndexPath> = []
 
     @IBOutlet weak var CommentView: UITableView!
     
@@ -145,7 +148,9 @@ extension ResultViewController: UITableViewDataSource {
         }
 
         let data = filteredComments[indexPath.row]
-        cell.configure(with: data)
+        let expanded = expandedIndexPaths.contains(indexPath)
+        cell.configure(with: data, expanded: expanded)
+        cell.delegate = self
         return cell
     }
     
@@ -177,4 +182,16 @@ extension ResultViewController: UITableViewDataSource {
         return dynamicHeight
     }
     
+}
+extension ResultViewController: CommentCellDelegate {
+    func didTapExpandButton(in cell: CommentCell) {
+        if let indexPath = CommentView.indexPath(for: cell) {
+            if expandedIndexPaths.contains(indexPath) {
+                expandedIndexPaths.remove(indexPath)
+            } else {
+                expandedIndexPaths.insert(indexPath)
+            }
+            CommentView.reloadRows(at: [indexPath], with: .automatic)
+        }
+    }
 }

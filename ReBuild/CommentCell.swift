@@ -38,22 +38,43 @@ class CommentCell: UITableViewCell, UITextViewDelegate {
         contentView.frame = contentView.frame.inset(by: margin)
     }
     
-    func configure(with data: CommentData/*, expanded: Bool*/) {
-        // アイコン設定
-        switch data.rating {
-        case 0:
-            faceImageView.image = UIImage(named: "FaceIcon1")
-        case 1:
-            faceImageView.image = UIImage(named: "FaceIcon2")
-        case 2:
-            faceImageView.image = UIImage(named: "FaceIcon3")
-        case 3:
-            faceImageView.image = UIImage(named: "FaceIcon4")
-        default:
-            faceImageView.image = nil
+    
+    
+    func configure(with data: CommentData, expanded: Bool) {
+            ComentText.text = data.comment
+            isExpanded = expanded
+            
+            // アイコン
+            switch data.rating {
+            case 0: faceImageView.image = UIImage(named: "FaceIcon1")
+            case 1: faceImageView.image = UIImage(named: "FaceIcon2")
+            case 2: faceImageView.image = UIImage(named: "FaceIcon3")
+            case 3: faceImageView.image = UIImage(named: "FaceIcon4")
+            default: faceImageView.image = nil
+            }
+            
+            // 最大行数を6行に制限（未展開時）
+            if expanded {
+                ComentText.textContainer.maximumNumberOfLines = 0
+                ComentText.textContainer.lineBreakMode = .byWordWrapping
+                expandButton.setTitle("", for: .normal)
+            } else {
+                ComentText.textContainer.maximumNumberOfLines = 6
+                ComentText.textContainer.lineBreakMode = .byTruncatingTail
+                expandButton.setTitle("…さらに表示", for: .normal)
+            }
+            
+            // コメントが短い場合はボタン非表示
+            expandButton.isHidden = needsExpandButton() == false
         }
-
-        ComentText.text = data.comment
-    }
+        
+        private func needsExpandButton() -> Bool {
+            let textHeight = ComentText.sizeThatFits(CGSize(width: ComentText.frame.width, height: .greatestFiniteMagnitude)).height
+            return textHeight > (20 * 6)
+        }
+        
+        @IBAction func expandButtonTapped(_ sender: UIButton) {
+            delegate?.didTapExpandButton(in: self)
+        }
     
 }
