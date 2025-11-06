@@ -6,6 +6,8 @@
 //
 import UIKit
 import CoreLocation
+import Alamofire
+import SwiftyJSON
 
 protocol ComentControllerDelegate: AnyObject {
     func didAddComment(comment: String, rating: Int, latitude: Double?, longitude: Double?)
@@ -17,6 +19,8 @@ class ComentController: UIViewController,UITextFieldDelegate, CLLocationManagerD
     @IBOutlet weak var valuBtn3: UIButton!
     @IBOutlet weak var valuBtn4: UIButton!
     
+    @IBOutlet weak var NewProductName: UITextField!
+    @IBOutlet weak var ProductTextCount: UILabel!
     @IBOutlet weak var GoResult: UIButton!
     @IBOutlet weak var TextCountLabel: UILabel!
     var selectedRating: Int? = nil
@@ -39,6 +43,7 @@ class ComentController: UIViewController,UITextFieldDelegate, CLLocationManagerD
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         currentLocation = locations.last?.coordinate
     }
+    
     func textViewDidChange(_ textView: UITextView) {
             // 現在の文字数を取得
             let inputLength = textView.text.count
@@ -46,11 +51,18 @@ class ComentController: UIViewController,UITextFieldDelegate, CLLocationManagerD
             TextCountLabel.text = "\(inputLength)/\(MaxcomentCount)"
             
         }
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+           if let currentText = textField.text as NSString? {
+               let updatedText = currentText.replacingCharacters(in: range, with: string)
+               ProductTextCount.text = "\(updatedText.count)"
+           }
+           return true
+       }
     
     @IBOutlet weak var textField: UITextView!
     
     var MaxcomentCount:Int = 220
-    
+    var ProductNameCount:Int = 25
     
     weak var delegate: ComentControllerDelegate?
     
@@ -69,7 +81,7 @@ class ComentController: UIViewController,UITextFieldDelegate, CLLocationManagerD
         if let mapVC = storyboard.instantiateViewController(withIdentifier: "CommentMapViewController") as? CommentMapViewController {
             
             mapVC.codeNumber = code
-            mapVC.productName = product
+            mapVC.productName = NewProductName.text
             
             if let nav = navigationController {
                 nav.pushViewController(mapVC, animated: true)
@@ -81,16 +93,6 @@ class ComentController: UIViewController,UITextFieldDelegate, CLLocationManagerD
 
     @IBAction func AddBtn(_ sender: Any)
     {
-        if let textCount = textField.text {
-            let inputLength: Int = textCount.count
-            print(inputLength)
-            if(inputLength > MaxcomentCount){
-                let alert = UIAlertController(title: "文字数が多すぎます", message: "", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default))
-                present(alert, animated: true)
-                return
-            }
-        }
         
         if let textCount = textField.text {
             let inputLength: Int = textCount.count
@@ -102,6 +104,38 @@ class ComentController: UIViewController,UITextFieldDelegate, CLLocationManagerD
                 return
             }
         }
+        if let ProducttextCount = NewProductName.text {
+            let inputLength: Int = ProducttextCount.count
+            print(inputLength)
+            if(inputLength == 0){
+                let alert = UIAlertController(title: "商品名を入力してください", message: "", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default))
+                present(alert, animated: true)
+                return
+            }
+        }
+        if let textCount = textField.text {
+            let inputLength: Int = textCount.count
+            print(inputLength)
+            if(inputLength > MaxcomentCount){
+                let alert = UIAlertController(title: "文字数が多すぎます", message: "", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default))
+                present(alert, animated: true)
+                return
+            }
+        }
+        if let ProducttextCount = NewProductName.text {
+            let inputLength: Int = ProducttextCount.count
+            print(inputLength)
+            if(inputLength > ProductNameCount){
+                let alert = UIAlertController(title: "商品名の文字数が多すぎます", message: "", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default))
+                present(alert, animated: true)
+                return
+            }
+        }
+        
+        
         
         guard let rating = selectedRating else {
             let alert = UIAlertController(title: "評価を選んでください", message: "", preferredStyle: .alert)
@@ -116,7 +150,8 @@ class ComentController: UIViewController,UITextFieldDelegate, CLLocationManagerD
             let latitude = currentLocation?.latitude ?? 0.0
             let longitude = currentLocation?.longitude ?? 0.0
             let code = codeNumber ?? ""
-            let product = productName ?? ""
+            let product = (NewProductName.text?.isEmpty == false) ? NewProductName.text! : (productName ?? "")
+
             
             print(codeNumber)
             print(productName)
@@ -134,10 +169,11 @@ class ComentController: UIViewController,UITextFieldDelegate, CLLocationManagerD
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
             if let mapVC = storyboard.instantiateViewController(withIdentifier: "CommentMapViewController") as? CommentMapViewController {
                 
+
                 mapVC.codeNumber = code
                 mapVC.productName = product
                 mapVC.comments.append(newComment)
-                mapVC.sendCommentToServer(barcode: code, commentData: newComment)
+                mapVC.sendCommentToServer(barcode: code, product: product, commentData: newComment)
 
                 if let nav = navigationController {
                 nav.pushViewController(mapVC, animated: true)
@@ -180,6 +216,18 @@ class ComentController: UIViewController,UITextFieldDelegate, CLLocationManagerD
             TextCountLabel.text = "\(inputLength)/\(MaxcomentCount)"
         }
         
+        let inputLength2: Int = productName?.count ?? 0
+        ProductTextCount.text = "\(inputLength2)"
+       
+        NewProductName.text = productName
+        NewProductName.font = UIFont(name: "LINE Seed JP App_OTF Regular", size: 14)
+        
+        NewProductName.layer.borderColor = UIColor.gray.cgColor
+        NewProductName.layer.borderWidth = 2.0
+        NewProductName.layer.cornerRadius = 8.0
+        NewProductName.layer.masksToBounds = true
+        NewProductName.clipsToBounds = true
+        NewProductName.delegate = self
         
         textField.layer.borderColor = UIColor.gray.cgColor
         textField.layer.borderWidth = 2.0

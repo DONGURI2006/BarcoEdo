@@ -45,32 +45,34 @@ class ResultViewController: UIViewController, UITableViewDelegate {
         CommentView.estimatedRowHeight = 60
         
         filteredComments = comments
+        
+        filteredComments = comments.reversed()
         updateEmptyState()
-        setupInitialButtonState()
+//        setupInitialButtonState()
         
     }
-    private func setupInitialButtonState() {
-        
-        let selectedColor = UIColor(red: 115/255, green: 173/255, blue: 57/255, alpha: 1.0)
-        
-        // すべてのボタンを初期化
-        let allButtons = [AllBtn, ValueBtn1, ValueBtn2, ValueBtn3, ValueBtn4]
-        for button in allButtons {
-            button?.backgroundColor = .white
-            button?.setTitleColor(selectedColor, for: .normal)
-        }
-        
-        // Allボタンを選択状態にする
-        AllBtn.backgroundColor = selectedColor
-        AllBtn.setTitleColor(.white, for: .normal)
-        
-        // コメント全件表示
-        
-        selectedRating = nil
-        filteredComments = comments
-        CommentView.reloadData()
-        updateEmptyState()
-    }
+//    private func setupInitialButtonState() {
+//        
+//        let selectedColor = UIColor(red: 115/255, green: 173/255, blue: 57/255, alpha: 1.0)
+//        
+//        // すべてのボタンを初期化
+//        let allButtons = [AllBtn, ValueBtn1, ValueBtn2, ValueBtn3, ValueBtn4]
+//        for button in allButtons {
+//            button?.backgroundColor = .white
+//            button?.setTitleColor(selectedColor, for: .normal)
+//        }
+//        
+//        // Allボタンを選択状態にする
+//        AllBtn.backgroundColor = selectedColor
+//        AllBtn.setTitleColor(.white, for: .normal)
+//        
+//        // コメント全件表示
+//        
+//        selectedRating = nil
+//        filteredComments = comments
+//        CommentView.reloadData()
+//        updateEmptyState()
+//    }
 
     
     var selectedRating: Int? = nil
@@ -97,22 +99,23 @@ class ResultViewController: UIViewController, UITableViewDelegate {
                 switch sender {
                 case AllBtn:
                     selectedRating = nil
-                    filteredComments = comments
+                    filteredComments = comments.reversed()
                 case ValueBtn1:
                     selectedRating = 0
-                    filteredComments = comments.filter { $0.rating == 0 }
+                    filteredComments = comments.filter { $0.rating == 0 }.reversed()
                 case ValueBtn2:
                     selectedRating = 1
-                    filteredComments = comments.filter { $0.rating == 1 }
+                    filteredComments = comments.filter { $0.rating == 1 }.reversed()
                 case ValueBtn3:
                     selectedRating = 2
-                    filteredComments = comments.filter { $0.rating == 2 }
+                    filteredComments = comments.filter { $0.rating == 2 }.reversed()
                 case ValueBtn4:
                     selectedRating = 3
-                    filteredComments = comments.filter { $0.rating == 3 }
+                    filteredComments = comments.filter { $0.rating == 3 }.reversed()
                 default:
                     break
                 }
+
                 
                 
                 sender.setTitleColor(.white, for: .normal)

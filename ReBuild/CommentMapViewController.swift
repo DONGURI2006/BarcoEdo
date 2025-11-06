@@ -28,7 +28,9 @@ class CommentMapViewController: UIViewController {
     @IBOutlet weak var commentButton: UIButton!
     @IBOutlet weak var mapButton: UIButton!
     
-    @IBOutlet weak var NewProductName: UITextField!
+    private let commentUnderline = UIView()
+    private let mapUnderline = UIView()
+
     
     var codeNumber: String?
     var productName: String?
@@ -43,40 +45,20 @@ class CommentMapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        
+        print(productName)
+        
+        
         if let code = codeNumber {
             fetchCommentsFromServer(for: code)
         }
         
         showCommentView()
-        
-        
-        
-        NewProductName.text = productName
+        setupUnderlineViews()
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tapGesture)
         
-        NewProductName.addTarget(self, action: #selector(productNameChanged(_:)), for: .editingChanged)
-        
-    }
-    
-    @objc func productNameChanged(_ textField: UITextField) {
-        let newName = textField.text ?? ""
-        productName = newName
-        
-        comments = comments.map { comment in
-            var updated = comment
-            updated.productName = newName
-            return updated
-        }
-        updateEmbeddedControllers()
-        
-        
-        print(newName)
-        if let code = codeNumber, !newName.isEmpty {
-                NewProductToServer(barcode: code, product: newName)
-            }
     }
     
     
@@ -127,33 +109,7 @@ class CommentMapViewController: UIViewController {
                 
         }
     }
-    func NewProductToServer(barcode: String, product:String){
-        let params: [String: Any] = [
-            "barcode": barcode,
-            "product": product
-        ]
-        AF.request("https://bunri.yusk1450.com/app-pj/barcoedo/check.php",
-                   method: .get,
-                   parameters: params,
-                   encoding: URLEncoding.default,
-                   headers: nil)
-    
-        .responseJSON { res in
-            if let data = res.data{
-                let json = JSON(data)
-                print("サーバー応答: \(json)")
-            }
-                    
-        }
-    }
-    
-    func sendCommentToServer(barcode: String, commentData: CommentData) {
-            guard let product = productName
-        
-            else {
-                print("商品名がない")
-                return
-            }
+    func sendCommentToServer(barcode: String, product : String, commentData: CommentData) {
             
             let params: [String: Any] = [
                 "barcode": barcode,
@@ -164,12 +120,14 @@ class CommentMapViewController: UIViewController {
                 "longitude": commentData.longitude
             ]
             
+            print("送信パラメータ:", params)
             
             AF.request("https://bunri.yusk1450.com/app-pj/barcoedo/add.php",
                        method: .post,
                        parameters: params,
                        encoding: JSONEncoding.default,
                        headers: nil)
+        
         
             .responseJSON { res in
                 if let data = res.data{
@@ -206,21 +164,54 @@ class CommentMapViewController: UIViewController {
         showMapView()
     }
     
-    func showCommentView() {
-        let selectedColor = UIColor(red: 115/255, green: 173/255, blue: 57/255, alpha: 1.0)
-        commentContainer.isHidden = false
-        mapContainer.isHidden = true
-        commentButton.setTitleColor(selectedColor, for: .normal)
-        mapButton.setTitleColor(.lightGray, for: .normal)
-    }
-    
-    func showMapView() {
-        let selectedColor = UIColor(red: 115/255, green: 173/255, blue: 57/255, alpha: 1.0)
-        commentContainer.isHidden = true
-        mapContainer.isHidden = false
-        commentButton.setTitleColor(.lightGray, for: .normal)
-        mapButton.setTitleColor(selectedColor, for: .normal)
-    }
+    func setupUnderlineViews() {
+        
+            let selectedColor = UIColor(red: 115/255, green: 173/255, blue: 57/255, alpha: 1.0)
+
+            [commentUnderline, mapUnderline].forEach {
+                $0.backgroundColor = selectedColor
+                $0.translatesAutoresizingMaskIntoConstraints = false
+                view.addSubview($0)
+            }
+
+            NSLayoutConstraint.activate([
+                commentUnderline.heightAnchor.constraint(equalToConstant: 3),
+                commentUnderline.bottomAnchor.constraint(equalTo: commentButton.bottomAnchor, constant: 0),
+                commentUnderline.leadingAnchor.constraint(equalTo: commentButton.leadingAnchor),
+                commentUnderline.trailingAnchor.constraint(equalTo: commentButton.trailingAnchor),
+
+                mapUnderline.heightAnchor.constraint(equalToConstant: 3),
+                mapUnderline.bottomAnchor.constraint(equalTo: mapButton.bottomAnchor, constant: 0),
+                mapUnderline.leadingAnchor.constraint(equalTo: mapButton.leadingAnchor),
+                mapUnderline.trailingAnchor.constraint(equalTo: mapButton.trailingAnchor),
+            ])
+        }
+
+        func showCommentView() {
+            let selectedColor = UIColor(red: 115/255, green: 173/255, blue: 57/255, alpha: 1.0)
+            let graycolor = UIColor(red: 217/255, green: 217/255, blue: 217/255, alpha: 1.0)
+            commentContainer.isHidden = false
+            mapContainer.isHidden = true
+
+            commentButton.setTitleColor(selectedColor, for: .normal)
+            mapButton.setTitleColor(graycolor, for: .normal)
+
+            commentUnderline.isHidden = false
+            mapUnderline.isHidden = true
+        }
+
+        func showMapView() {
+            let selectedColor = UIColor(red: 115/255, green: 173/255, blue: 57/255, alpha: 1.0)
+            let graycolor = UIColor(red: 217/255, green: 217/255, blue: 217/255, alpha: 1.0)
+            commentContainer.isHidden = true
+            mapContainer.isHidden = false
+
+            commentButton.setTitleColor(graycolor, for: .normal)
+            mapButton.setTitleColor(selectedColor, for: .normal)
+
+            commentUnderline.isHidden = true
+            mapUnderline.isHidden = false
+        }
     
         override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
             if segue.identifier == "EmbedComment",
@@ -245,10 +236,7 @@ class CommentMapViewController: UIViewController {
                     ($0.latitude, $0.longitude, $0.rating, $0.comment)
                 }
             }
-
         }
-    
-    
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }

@@ -89,10 +89,7 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
 
     func checkBarcodeOnServer(_ barcode: String) {
             let params: [String: Any] = ["barcode": barcode]
-        
-            AF.request(
-//                "http://192.168.0.84:8080/check",
-                "https://bunri.yusk1450.com/app-pj/barcoedo/check.php",
+            AF.request("https://bunri.yusk1450.com/app-pj/barcoedo/check.php",
                        method: .get,
                        parameters: params,
                        encoding: URLEncoding.default,
@@ -113,58 +110,24 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
                         if exists {
                             let dataToSend: [String: Any] = [
                                 "code": barcode,
-                                "productName": productName
+                                "product": productName
                             ]
-                            
-                            
                             print("登録済み: \(productName)")
                             self.performSegue(withIdentifier: "GoResult", sender: dataToSend)
-                            
                         } else {
+                            let dataToSend: [String: Any] = [
+                                "code": barcode,
+                                "product": ""
+                            ]
                             print("未登録バーコード: \(barcode)")
-                            self.NewBarcode(barcode)
+                            self.performSegue(withIdentifier: "GoResult", sender: dataToSend)
+                            
                         }
+                        
                     }
                 }
             }
         }
-    
-func NewBarcode(_ barcode: String) {
-    let params: [String: Any] = [
-        "barcode": barcode,
-        "product": ""
-    ]
-    print("これみろ→\(params)")
-    AF.request(
-//        "http://192.168.0.84:8080/check",
-        "https://bunri.yusk1450.com/app-pj/barcoedo/check.php",
-                method: .get,
-                parameters: params,
-                encoding: URLEncoding.default,
-                headers: nil)
-    
-    
-    
-        
-        .responseJSON { res in
-                
-            if let data = res.data{
-                    
-                _ = JSON(data)
-                    
-                DispatchQueue.main.async {
-                    
-                    let dataToSend: [String: Any] = [
-                        "code": barcode,
-                        "productName": ""
-                    ]
-                    
-                    
-                    self.performSegue(withIdentifier: "GoResult", sender: dataToSend)
-                }
-            }
-        }
-    }
     
     //画面遷移
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -172,7 +135,7 @@ func NewBarcode(_ barcode: String) {
             let destination = segue.destination as? ComentController,
             let data = sender as? [String: Any] {
             destination.codeNumber = data["code"] as? String
-            destination.productName = data["productName"] as? String
+            destination.productName = data["product"] as? String
         }
     }
 
