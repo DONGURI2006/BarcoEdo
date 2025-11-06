@@ -178,7 +178,6 @@ class ComentController: UIViewController,UITextFieldDelegate, CLLocationManagerD
 
                 }
     
-    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -207,6 +206,5 @@ class ComentController: UIViewController,UITextFieldDelegate, CLLocationManagerD
             view.endEditing(true)
         }
         
-
     }
 

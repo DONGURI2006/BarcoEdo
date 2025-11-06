@@ -71,9 +71,9 @@ class CommentMapViewController: UIViewController {
         updateEmbeddedControllers()
         
         print(newName)
-        if let code = codeNumber {
-            NewProductToServer(barcode: code,product: newName)
-        }
+        if let code = codeNumber, !newName.isEmpty {
+                NewProductToServer(barcode: code, product: newName)
+            }
     }
     
     
@@ -124,7 +124,7 @@ class CommentMapViewController: UIViewController {
                 
         }
     }
-    func NewProductToServer(barcode: String,product:String){
+    func NewProductToServer(barcode: String, product:String){
         let params: [String: Any] = [
             "barcode": barcode,
             "product": product

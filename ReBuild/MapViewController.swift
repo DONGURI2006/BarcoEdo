@@ -51,15 +51,24 @@ class MapViewController: UIViewController, MKMapViewDelegate/*, UICollectionView
     }
     
     func updateButtonTitle() {
+        //ボタンの設定
+        var config = UIButton.Configuration.plain()
+        config.imagePadding = 4//画像と文字の余白
+        config.imagePlacement = .top//画像の位置
+        
+        //画像、名前の設定
         let title = isCircle ? "丸" : "四角"
         let imageName = isCircle ? "Ellipse1" : "Script1"
+        config.image = UIImage(named: imageName)
 
-        OnOffBtn.setTitle(title, for: .normal)
-        OnOffBtn.setImage(UIImage(named: imageName), for: .normal)
 
-        OnOffBtn.titleLabel?.font = UIFont(name: "LINE Seed JP App_OTF Regular", size: 8)
-        OnOffBtn.layoutIfNeeded()
-    }
+        var attributedTitle = AttributedString(title)
+        attributedTitle.font = UIFont(name: "LINE Seed JP App_OTF Regular", size: 8)
+        config.attributedTitle = attributedTitle
+
+        OnOffBtn.configuration = config
+     }
+
     func updateMap() {
         guard !commentLocations.isEmpty else {
             return

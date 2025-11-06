@@ -1,19 +1,33 @@
 import UIKit
 
-class CommentCell: UITableViewCell {
-    @IBOutlet weak var faceImageView: UIImageView!
-    @IBOutlet weak var commentLabel: UILabel!
 
+protocol CommentCellDelegate: AnyObject {
+    func didTapExpandButton(in cell: CommentCell)
+}
+
+class CommentCell: UITableViewCell, UITextViewDelegate {
+    @IBOutlet weak var faceImageView: UIImageView!
+
+    @IBOutlet weak var ComentText: UITextView!
+    
+    @IBOutlet weak var expandButton: UIButton!
+        
+    weak var delegate: CommentCellDelegate?
+        
+    private var isExpanded = false
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        commentLabel.font = UIFont.init(name: "LINE Seed JP App_OTF Regular", size: 15)
-        commentLabel.textColor = .black
-        commentLabel.numberOfLines = 0
         faceImageView.contentMode = .scaleAspectFit
+        ComentText.delegate = self
+        
+        ComentText.isEditable = false
+        ComentText.isSelectable = false
+        ComentText.isScrollEnabled = false
         
     }
-
-    func configure(with data: CommentData) {
+    
+    func configure(with data: CommentData/*, expanded: Bool*/) {
         // アイコン設定
         switch data.rating {
         case 0:
@@ -28,7 +42,7 @@ class CommentCell: UITableViewCell {
             faceImageView.image = nil
         }
 
-        // コメント設定
-        commentLabel.text = data.comment
+        ComentText.text = data.comment
     }
+    
 }
