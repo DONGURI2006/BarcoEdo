@@ -88,13 +88,14 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
     }
 
     func checkBarcodeOnServer(_ barcode: String) {
-            let params: [String: Any] = ["barcode": String(barcode)]
-            
-            AF.request("http://192.168.0.84:8080/check",
-//                "https://bunri.yusk1450.com/app-pj/barcoedo/check.php",
-                       method: .post,
+            let params: [String: Any] = ["barcode": barcode]
+        
+            AF.request(
+//                "http://192.168.0.84:8080/check",
+                "https://bunri.yusk1450.com/app-pj/barcoedo/check.php",
+                       method: .get,
                        parameters: params,
-                       encoding: JSONEncoding.default,
+                       encoding: URLEncoding.default,
                        headers: nil)
         
             .responseJSON { res in
@@ -108,15 +109,17 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
                     let productName = json["product"].stringValue
                     
                     DispatchQueue.main.async {
+                        
                         if exists {
-                            
                             let dataToSend: [String: Any] = [
                                 "code": barcode,
                                 "productName": productName
                             ]
                             
+                            
                             print("登録済み: \(productName)")
                             self.performSegue(withIdentifier: "GoResult", sender: dataToSend)
+                            
                         } else {
                             print("未登録バーコード: \(barcode)")
                             self.NewBarcode(barcode)
@@ -131,12 +134,17 @@ func NewBarcode(_ barcode: String) {
         "barcode": barcode,
         "product": ""
     ]
-    AF.request("http://192.168.0.84:8080/check",
-//        "https://bunri.yusk1450.com/app-pj/barcoedo/add.php",
-                method: .post,
+    print("これみろ→\(params)")
+    AF.request(
+//        "http://192.168.0.84:8080/check",
+        "https://bunri.yusk1450.com/app-pj/barcoedo/check.php",
+                method: .get,
                 parameters: params,
-                encoding: JSONEncoding.default,
+                encoding: URLEncoding.default,
                 headers: nil)
+    
+    
+    
         
         .responseJSON { res in
                 
@@ -150,6 +158,8 @@ func NewBarcode(_ barcode: String) {
                         "code": barcode,
                         "productName": ""
                     ]
+                    
+                    
                     self.performSegue(withIdentifier: "GoResult", sender: dataToSend)
                 }
             }

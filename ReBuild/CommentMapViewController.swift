@@ -49,7 +49,9 @@ class CommentMapViewController: UIViewController {
         }
         
         showCommentView()
-        print(comments)
+        
+        
+        
         NewProductName.text = productName
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
@@ -70,6 +72,7 @@ class CommentMapViewController: UIViewController {
         }
         updateEmbeddedControllers()
         
+        
         print(newName)
         if let code = codeNumber, !newName.isEmpty {
                 NewProductToServer(barcode: code, product: newName)
@@ -81,11 +84,10 @@ class CommentMapViewController: UIViewController {
         
         let params: [String: Any] = ["barcode": barcode]
         
-        AF.request("http://192.168.0.84:8080/check",
-//            "https://bunri.yusk1450.com/app-pj/barcoedo/check.php",
-                   method: .post,
+        AF.request("https://bunri.yusk1450.com/app-pj/barcoedo/check.php",
+                   method: .get,
                    parameters: params,
-                   encoding: JSONEncoding.default,
+                   encoding: URLEncoding.default,
                    headers: nil)
         
         
@@ -94,6 +96,7 @@ class CommentMapViewController: UIViewController {
             if let data = res.data{
                 let json = JSON(data)
                 print("サーバー応答: \(json)")
+                print("ok")
                 
                 let exists = json["exists"].boolValue
                 let product = json["product"].stringValue
@@ -129,11 +132,10 @@ class CommentMapViewController: UIViewController {
             "barcode": barcode,
             "product": product
         ]
-        AF.request("http://192.168.0.84:8080/add",
-//            "https://bunri.yusk1450.com/app-pj/barcoedo/add.php",
-                   method: .post,
+        AF.request("https://bunri.yusk1450.com/app-pj/barcoedo/check.php",
+                   method: .get,
                    parameters: params,
-                   encoding: JSONEncoding.default,
+                   encoding: URLEncoding.default,
                    headers: nil)
     
         .responseJSON { res in
@@ -163,8 +165,7 @@ class CommentMapViewController: UIViewController {
             ]
             
             
-            AF.request("http://192.168.0.84:8080/add",
-//                "https://bunri.yusk1450.com/app-pj/barcoedo/add.php",
+            AF.request("https://bunri.yusk1450.com/app-pj/barcoedo/add.php",
                        method: .post,
                        parameters: params,
                        encoding: JSONEncoding.default,
@@ -206,17 +207,19 @@ class CommentMapViewController: UIViewController {
     }
     
     func showCommentView() {
+        let selectedColor = UIColor(red: 115/255, green: 173/255, blue: 57/255, alpha: 1.0)
         commentContainer.isHidden = false
         mapContainer.isHidden = true
-        commentButton.setTitleColor(.black, for: .normal)
+        commentButton.setTitleColor(selectedColor, for: .normal)
         mapButton.setTitleColor(.lightGray, for: .normal)
     }
     
     func showMapView() {
+        let selectedColor = UIColor(red: 115/255, green: 173/255, blue: 57/255, alpha: 1.0)
         commentContainer.isHidden = true
         mapContainer.isHidden = false
         commentButton.setTitleColor(.lightGray, for: .normal)
-        mapButton.setTitleColor(.black, for: .normal)
+        mapButton.setTitleColor(selectedColor, for: .normal)
     }
     
         override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

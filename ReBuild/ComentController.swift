@@ -43,7 +43,7 @@ class ComentController: UIViewController,UITextFieldDelegate, CLLocationManagerD
             // 現在の文字数を取得
             let inputLength = textView.text.count
             
-            TextCountLabel.text = "\(MaxcomentCount - inputLength)/\(MaxcomentCount)"
+            TextCountLabel.text = "\(inputLength)/\(MaxcomentCount)"
             
         }
     
@@ -149,34 +149,27 @@ class ComentController: UIViewController,UITextFieldDelegate, CLLocationManagerD
     
     
     @IBAction func valueBtn(_ sender: UIButton) {
-            // 押されたボタンを識別（タグで設定する想定）
+        // 押されたボタンを識別（タグで設定する想定）
         selectedRating = sender.tag
-        
-        let buttonColors: [UIColor] = [
-            UIColor(red: 64/255.0,green: 140/255.0,blue: 82/255.0,alpha: 0.5),//valuBtn1
-            UIColor(red: 115/255.0,green: 173/255.0,blue: 57/255.0,alpha: 0.5),//valuBtn2
-            UIColor(red: 209/255.0,green: 124/255.0,blue: 45/255.0,alpha: 0.5),//valuBtn3
-            UIColor(red: 169/255.0,green: 44/255.0,blue: 25/255.0,alpha: 0.5),//valuBtn4
-        ]
 
         // すべてのボタンを配列化して不透明度を変更
         let allButtons = [valuBtn1, valuBtn2, valuBtn3, valuBtn4]
-            for (index, button) in allButtons.enumerated() {
-                guard let button = button else { continue }
-        // 拡大するボタンかどうかを判定
-                let isSelected = (index == selectedRating)
-                UIView.animate(withDuration: 0.2) {
-        // 1.25倍に拡大する
-                button.transform = isSelected ? CGAffineTransform(scaleX: 1.25, y: 1.25) : .identity
-                if isSelected {
-                    button.tintColor = buttonColors[index]
-                } else {
-                    button.tintColor = .label  // そのままにする
-                }
+        for (index, button) in allButtons.enumerated() {
+            guard let button = button else { continue }
+
+        // 押されたボタンなら変える、そうでなければそのまま
+            let imageName = (index == selectedRating)
+                ? "FaceBtnPush \(index + 1)"
+                : "FaceIcon\(index + 1)"
+
+        UIView.animate(withDuration: 0.2) {
+        // 画像変更
+        var config = UIButton.Configuration.plain()
+            config.image = UIImage(named: imageName)
+            button.configuration = config
             }
         }
-
-                }
+    }
     
     override func viewDidLoad()
     {
@@ -184,15 +177,16 @@ class ComentController: UIViewController,UITextFieldDelegate, CLLocationManagerD
         
         if let textCount = textField.text {
             let inputLength: Int = textCount.count
-            TextCountLabel.text = "\(MaxcomentCount - inputLength)/\(MaxcomentCount)"
+            TextCountLabel.text = "\(inputLength)/\(MaxcomentCount)"
         }
         
         
-        textField.layer.borderColor = UIColor.black.cgColor
-        textField.layer.borderWidth = 1.0
+        textField.layer.borderColor = UIColor.gray.cgColor
+        textField.layer.borderWidth = 2.0
+        textField.layer.cornerRadius = 8.0
+        textField.layer.masksToBounds = true
         textField.clipsToBounds = true
         textField.delegate = self
-        
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tapGesture)

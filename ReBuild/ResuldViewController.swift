@@ -16,7 +16,9 @@ class ResultViewController: UIViewController, UITableViewDelegate {
     var productName:String?
     var latitude: Double?
     var longitude: Double?
+
     var comments: [CommentData] = []
+    var filteredComments: [CommentData] = []
 
     @IBOutlet weak var CommentView: UITableView!
     
@@ -42,9 +44,35 @@ class ResultViewController: UIViewController, UITableViewDelegate {
         CommentView.rowHeight = UITableView.automaticDimension
         CommentView.estimatedRowHeight = 60
         
+        filteredComments = comments
         updateEmptyState()
+        setupInitialButtonState()
         
     }
+    private func setupInitialButtonState() {
+        
+        let selectedColor = UIColor(red: 115/255, green: 173/255, blue: 57/255, alpha: 1.0)
+        
+        // すべてのボタンを初期化
+        let allButtons = [AllBtn, ValueBtn1, ValueBtn2, ValueBtn3, ValueBtn4]
+        for button in allButtons {
+            button?.backgroundColor = .white
+            button?.setTitleColor(selectedColor, for: .normal)
+        }
+        
+        // Allボタンを選択状態にする
+        AllBtn.backgroundColor = selectedColor
+        AllBtn.setTitleColor(.white, for: .normal)
+        
+        // コメント全件表示
+        
+        selectedRating = nil
+        filteredComments = comments
+        CommentView.reloadData()
+        updateEmptyState()
+    }
+
+    
     var selectedRating: Int? = nil
 
         @IBAction func ValueBtn(_ sender: UIButton)
@@ -52,21 +80,46 @@ class ResultViewController: UIViewController, UITableViewDelegate {
             selectedRating = sender.tag
 
             let selectedColor = UIColor(red: 115/255, green: 173/255, blue: 57/255, alpha: 1.0)
-
             let allButtons = [AllBtn,ValueBtn1, ValueBtn2, ValueBtn3, ValueBtn4]
+            
+            
             for (index, button) in allButtons.enumerated() {
                 guard let button = button else { continue }
-
+                
                 let isSelected = (index == selectedRating)
-
-                UIView.animate(withDuration: 0.2) {
-                    if isSelected {
-                        button.backgroundColor = selectedColor
-                    } else {
-                        button.backgroundColor = .clear  // そのままにする
-                    }
-
+                
+                for button in allButtons {
+                    button?.setTitleColor(selectedColor, for: .normal)
+                    button?.backgroundColor = .white
                 }
+                
+                
+                switch sender {
+                case AllBtn:
+                    selectedRating = nil
+                    filteredComments = comments
+                case ValueBtn1:
+                    selectedRating = 0
+                    filteredComments = comments.filter { $0.rating == 0 }
+                case ValueBtn2:
+                    selectedRating = 1
+                    filteredComments = comments.filter { $0.rating == 1 }
+                case ValueBtn3:
+                    selectedRating = 2
+                    filteredComments = comments.filter { $0.rating == 2 }
+                case ValueBtn4:
+                    selectedRating = 3
+                    filteredComments = comments.filter { $0.rating == 3 }
+                default:
+                    break
+                }
+                
+                
+                sender.setTitleColor(.white, for: .normal)
+                sender.backgroundColor = selectedColor
+                
+                CommentView.reloadData()
+                updateEmptyState()
             }
         }
 
@@ -80,7 +133,7 @@ extension ResultViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         updateEmptyState()
         
-        return comments.count
+        return filteredComments.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -88,13 +141,13 @@ extension ResultViewController: UITableViewDataSource {
             return UITableViewCell()
         }
 
-        let data = comments[indexPath.row]
+        let data = filteredComments[indexPath.row]
         cell.configure(with: data)
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let data = comments[indexPath.row]
+        let data = filteredComments[indexPath.row]
         
         let commentText = data.comment
              
@@ -113,7 +166,7 @@ extension ResultViewController: UITableViewDataSource {
         //行数の計算
         let lineCount = ceil(textHeight / 26)
         //ベースの高さ
-        let baseHeight: CGFloat = 100
+        let baseHeight: CGFloat = 120
         
         //コメント行数に応じて高さを調整
         let dynamicHeight = baseHeight + (lineCount * 26)

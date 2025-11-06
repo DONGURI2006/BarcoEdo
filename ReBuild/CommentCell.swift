@@ -25,6 +25,17 @@ class CommentCell: UITableViewCell, UITextViewDelegate {
         ComentText.isSelectable = false
         ComentText.isScrollEnabled = false
         
+        contentView.layer.borderColor = UIColor.systemGreen.cgColor
+        contentView.layer.borderWidth = 2.0
+        contentView.layer.cornerRadius = 10.0
+        contentView.layer.masksToBounds = true
+        
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        let margin = UIEdgeInsets(top: 10, left: 30, bottom: 10, right: 30)
+        contentView.frame = contentView.frame.inset(by: margin)
     }
     
     func configure(with data: CommentData/*, expanded: Bool*/) {
