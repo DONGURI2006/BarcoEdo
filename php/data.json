@@ -1,0 +1,116 @@
+[
+    {
+        "barcode": "4901121636085",
+        "product": "このの",
+        "comment": [
+            {
+                "comment": "ここ",
+                "rating": 0,
+                "latitude": 35.37807078068641,
+                "longitude": 137.18818666908646
+            },
+            {
+                "comment": "ここここ",
+                "rating": 1,
+                "latitude": 35.37806698783596,
+                "longitude": 137.1881939184253
+            },
+            {
+                "comment": "こここ",
+                "rating": 0,
+                "latitude": 35.37806050207924,
+                "longitude": 137.1882024126503
+            }
+        ]
+    },
+    {
+        "barcode": "4571298861698",
+        "product": "こことの",
+        "comment": [
+            {
+                "comment": "こことこ",
+                "rating": 0,
+                "latitude": 35.24827483977173,
+                "longitude": 136.79047775505046
+            }
+        ]
+    },
+    {
+        "barcode": "4903110760474",
+        "product": "ショコラケーキ",
+        "comment": [
+            {
+                "comment": "こことこお",
+                "rating": 0,
+                "latitude": 35.248637190673286,
+                "longitude": 136.790610003784
+            }
+        ]
+    },
+    {
+        "barcode": "49177015",
+        "product": "消しゴム",
+        "comment": [
+            {
+                "comment": "とても使いやすい消しゴムでした。",
+                "rating": 0,
+                "latitude": 35.24872384431712,
+                "longitude": 136.79051852143874
+            },
+            {
+                "comment": "普通、使いやすいと言えば使いやすい",
+                "rating": 1,
+                "latitude": 35.248726356580846,
+                "longitude": 136.79050100492626
+            }
+        ]
+    },
+    {
+        "barcode": "4945247421323",
+        "product": "あ",
+        "comment": [
+            {
+                "comment": "あ",
+                "rating": 1,
+                "latitude": 35.2487402857872,
+                "longitude": 136.79048840977367
+            }
+        ]
+    },
+    {
+        "barcode": "4912345123459",
+        "product": "ここここ",
+        "comment": [
+            {
+                "comment": "こここききき",
+                "rating": 2,
+                "latitude": 35.24868409061593,
+                "longitude": 136.79157327889456
+            }
+        ]
+    },
+    {
+        "barcode": "1234567890111",
+        "product": "きききき",
+        "comment": [
+            {
+                "comment": "くにくにくに",
+                "rating": 3,
+                "latitude": 35.24868408405843,
+                "longitude": 136.79157327576485
+            }
+        ]
+    },
+    {
+        "barcode": "0987654321098",
+        "product": "くくくく",
+        "comment": [
+            {
+                "comment": "おおおおおおと",
+                "rating": 0,
+                "latitude": 35.24868406661982,
+                "longitude": 136.79157326744206
+            }
+        ]
+    }
+]
