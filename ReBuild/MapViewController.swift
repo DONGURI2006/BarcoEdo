@@ -33,13 +33,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate
         ComentTextView.isSelectable = false
         ComentTextView.isScrollEnabled = false
         
-        
         ComentView.alpha = 0.0
         ComentView.layer.borderColor = UIColor.systemGreen.cgColor
         ComentView.layer.borderWidth = 2.0
         ComentView.layer.cornerRadius = 10.0
         ComentView.layer.masksToBounds = true
-        
         
         print("こここ\(commentLocations)")
         mapView.delegate = self
@@ -54,7 +52,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate
         // 最初のコメント地点を中心にマップ表示
         let first = commentLocations[0]
         let center = CLLocationCoordinate2D(latitude: first.latitude, longitude: first.longitude)
-        let region = MKCoordinateRegion(center: center, latitudinalMeters: 500, longitudinalMeters: 500)
+        let region = MKCoordinateRegion(center: center, latitudinalMeters: 2000, longitudinalMeters: 2000)
         mapView.setRegion(region, animated: true)
         
         // 各コメント地点に図形を描画
@@ -104,7 +102,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate
         
         let first = commentLocations[0]
         let center = CLLocationCoordinate2D(latitude: first.latitude, longitude: first.longitude)
-        let region = MKCoordinateRegion(center: center, latitudinalMeters: 500, longitudinalMeters: 500)
+        let region = MKCoordinateRegion(center: center, latitudinalMeters: 2000, longitudinalMeters: 2000)
         mapView.setRegion(region, animated: true)
         
         for loc in commentLocations {
