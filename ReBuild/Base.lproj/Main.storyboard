@@ -328,15 +328,15 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="30x-da-6RJ">
-                                <rect key="frame" x="20" y="734" width="374" height="128"/>
+                                <rect key="frame" x="20" y="609" width="374" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ByZ-70-r5S">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="a" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ByZ-70-r5S">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <color key="textColor" systemColor="labelColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" red="0.22352941179999999" green="0.2823529541" blue="0.40000003579999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <fontDescription key="fontDescription" name="LINESeedJPApp_OTF-Regular" family="LINE Seed JP App_OTF" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                 </subviews>
@@ -348,11 +348,19 @@
                     </view>
                     <navigationItem key="navigationItem" id="Vw1-lQ-V69"/>
                     <connections>
+                        <outlet property="ComentTextView" destination="ByZ-70-r5S" id="VTT-Ly-Pe7"/>
+                        <outlet property="ComentView" destination="30x-da-6RJ" id="inU-FR-VfK"/>
                         <outlet property="OnOffBtn" destination="IKc-Ko-gUd" id="l14-sz-05Y"/>
                         <outlet property="mapView" destination="65W-cQ-kd8" id="7Cj-6l-Q1E"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Ab-lE-qQE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="nuI-GD-6Fy">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="141"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <viewLayoutGuide key="safeArea" id="yXQ-no-lEY"/>
+                    <color key="backgroundColor" red="0.88627451660000001" green="0.93333333730000001" blue="0.83137255909999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                </view>
             </objects>
             <point key="canvasLocation" x="2782.608695652174" y="125.89285714285714"/>
         </scene>
@@ -575,9 +583,6 @@
         <image name="FaceIcon4" width="40" height="40"/>
         <image name="HighLowBorder" width="155" height="11.5"/>
         <image name="Script1" width="38.5" height="33.5"/>
-        <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

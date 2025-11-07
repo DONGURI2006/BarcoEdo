@@ -3,11 +3,14 @@ import MapKit
 
 class MapViewController: UIViewController, MKMapViewDelegate{
     
-    @IBOutlet weak var MapComent: UICollectionView!
     
+    @IBOutlet weak var ComentView: UIView!
+    
+    @IBOutlet weak var ComentTextView: UITextView!
     @IBOutlet weak var mapView: MKMapView!
     
     @IBOutlet weak var OnOffBtn: UIButton!
+    
     
     var codeNumber: String?
     var productName: String?
@@ -23,11 +26,24 @@ class MapViewController: UIViewController, MKMapViewDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    
+        ComentTextView.alpha = 0.0
+        ComentView.alpha = 0.0
+        ComentView.layer.borderColor = UIColor.systemGreen.cgColor
+        ComentView.layer.borderWidth = 2.0
+        ComentView.layer.cornerRadius = 10.0
+        ComentView.layer.masksToBounds = true
+        
         
         print("こここ\(commentLocations)")
         mapView.delegate = self
         
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleMapTap(_:)))
+        mapView.addGestureRecognizer(tapGesture)
+        
         guard !commentLocations.isEmpty else { return }
+        
+        
         
         // 最初のコメント地点を中心にマップ表示
         let first = commentLocations[0]
@@ -45,6 +61,8 @@ class MapViewController: UIViewController, MKMapViewDelegate{
         }
     }
     
+    
+    
     func updateButtonTitle() {
         //ボタンの設定
         var config = UIButton.Configuration.plain()
@@ -59,7 +77,8 @@ class MapViewController: UIViewController, MKMapViewDelegate{
 
         var attributedTitle = AttributedString(title)
         attributedTitle.font = UIFont(name: "LINE Seed JP App_OTF Regular", size: 8)
-        attributedTitle.foregroundColor = UIColor(red: 57/255, green: 72/255, blue: 102/255, alpha: 1) // ← 文字色を指定
+        attributedTitle.foregroundColor = UIColor(red: 57/255, green: 72/255, blue: 102/255, alpha: 1) 
+        //文字色を指定
         config.attributedTitle = attributedTitle
 
         //背景色の設定
@@ -98,9 +117,60 @@ class MapViewController: UIViewController, MKMapViewDelegate{
             return MKOverlayRenderer(overlay: overlay)
         }
     
+    func showComment(for overlay: MapOverlay) {
+        if let data = commentLocations.first(where: {
+            abs($0.latitude - overlay.coordinate.latitude) < 0.0001 &&
+            abs($0.longitude - overlay.coordinate.longitude) < 0.0001
+        }) {
+            print("コメント内容: \(data.text)")
+            ComentTextView.alpha = 1.0
+            ComentTextView.text = data.text
+            ComentTextView.font = UIFont(name: "LINE Seed JP App_OTF Regular", size: 15)
+            
+            
+            
+        }
+    }
+
+    
     @IBAction func OnOffBtnTapped(_ sender: UIButton) {
             isCircle.toggle()
         }
+    
+    
+    @objc func handleMapTap(_ gesture: UITapGestureRecognizer) {
+        let point = gesture.location(in: mapView)
+        let coordinate = mapView.convert(point, toCoordinateFrom: mapView)
+        let mapPoint = MKMapPoint(coordinate)
+        
+        for overlay in mapView.overlays {
+            guard let customOverlay = overlay as? MapOverlay else { continue }
+            
+            let overlayRect = customOverlay.boundingMapRect
+            if overlayRect.contains(mapPoint) {
+                
+                ComentView.alpha = 1.0
+                print("評価: \(customOverlay.rating)")
+                
+                switch customOverlay.rating {
+                case 0:
+                    ComentView.layer.borderColor = UIColor.green.cgColor
+                case 1:
+                    ComentView.layer.borderColor = UIColor.systemGreen.cgColor
+                case 2:
+                    ComentView.layer.borderColor = UIColor.orange.cgColor
+                case 3:
+                    ComentView.layer.borderColor = UIColor.red.cgColor
+                default:
+                    ComentView.layer.borderColor = UIColor.gray.cgColor
+                }
+                
+                // ここでコメントを表示するなど
+                showComment(for: customOverlay)
+                break
+            }
+        }
+    }
     
 }
 
@@ -122,7 +192,14 @@ class MapOverlay: NSObject, MKOverlay {
             height: rectSize
         )
     }
+   
+
+    
+    
+    
 }
+
+
 
 //どんな図形を描くか
 class MapOverlayRenderer: MKOverlayRenderer {
