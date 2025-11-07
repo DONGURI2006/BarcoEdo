@@ -1,7 +1,7 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController, MKMapViewDelegate{
+class MapViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate{
     
     
     @IBOutlet weak var ComentView: UIView!
@@ -28,6 +28,12 @@ class MapViewController: UIViewController, MKMapViewDelegate{
         super.viewDidLoad()
     
         ComentTextView.alpha = 0.0
+        ComentTextView.delegate = self
+        ComentTextView.isEditable = false
+        ComentTextView.isSelectable = false
+        ComentTextView.isScrollEnabled = false
+        
+        
         ComentView.alpha = 0.0
         ComentView.layer.borderColor = UIColor.systemGreen.cgColor
         ComentView.layer.borderWidth = 2.0
@@ -154,9 +160,9 @@ class MapViewController: UIViewController, MKMapViewDelegate{
                 
                 switch customOverlay.rating {
                 case 0:
-                    ComentView.layer.borderColor = UIColor.green.cgColor
-                case 1:
                     ComentView.layer.borderColor = UIColor.systemGreen.cgColor
+                case 1:
+                    ComentView.layer.borderColor = UIColor.green.cgColor
                 case 2:
                     ComentView.layer.borderColor = UIColor.orange.cgColor
                 case 3:
@@ -225,9 +231,9 @@ class MapOverlayRenderer: MKOverlayRenderer {
         let fillColor: UIColor
         switch overlay.rating {
         case 0:
-            fillColor = UIColor.green.withAlphaComponent(0.5)
-        case 1:
             fillColor = UIColor.systemGreen.withAlphaComponent(0.5)
+        case 1:
+            fillColor = UIColor.green.withAlphaComponent(0.5)
         case 2:
             fillColor = UIColor.orange.withAlphaComponent(0.5)
         case 3:
