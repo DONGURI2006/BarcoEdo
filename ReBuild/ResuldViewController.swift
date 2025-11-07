@@ -25,21 +25,15 @@ class ResultViewController: UIViewController, UITableViewDelegate {
 
     @IBOutlet weak var CommentView: UITableView!
     
-    private let emptyLabel: UILabel = {
-            let label = UILabel()
-            label.text = "コメントがまだありません。\n最初のコメントを書き込もう！"
-            label.textAlignment = .center
-            label.numberOfLines = 0
-            label.textColor = .black
-            label.font = UIFont(name: "LINE Seed JP App_OTF Regular", size: 16)
-            return label
-        }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        filteredComments = comments.reversed()
+        let selectedColor = UIColor(red: 115/255, green: 173/255, blue: 57/255, alpha: 1.0)
+        AllBtn.setTitleColor(selectedColor, for: .normal)
+        AllBtn.backgroundColor = .white
+        CommentView.reloadData()
+
         print("商品名：\(self.productName as Any)")
-        
         
         CommentView.dataSource = self
         CommentView.delegate = self
@@ -47,36 +41,8 @@ class ResultViewController: UIViewController, UITableViewDelegate {
         CommentView.rowHeight = UITableView.automaticDimension
         CommentView.estimatedRowHeight = 60
         
-        filteredComments = comments
-        
-        filteredComments = comments.reversed()
-        updateEmptyState()
-//        setupInitialButtonState()
         
     }
-//    private func setupInitialButtonState() {
-//        
-//        let selectedColor = UIColor(red: 115/255, green: 173/255, blue: 57/255, alpha: 1.0)
-//        
-//        // すべてのボタンを初期化
-//        let allButtons = [AllBtn, ValueBtn1, ValueBtn2, ValueBtn3, ValueBtn4]
-//        for button in allButtons {
-//            button?.backgroundColor = .white
-//            button?.setTitleColor(selectedColor, for: .normal)
-//        }
-//        
-//        // Allボタンを選択状態にする
-//        AllBtn.backgroundColor = selectedColor
-//        AllBtn.setTitleColor(.white, for: .normal)
-//        
-//        // コメント全件表示
-//        
-//        selectedRating = nil
-//        filteredComments = comments
-//        CommentView.reloadData()
-//        updateEmptyState()
-//    }
-
     
     var selectedRating: Int? = nil
 
@@ -97,7 +63,6 @@ class ResultViewController: UIViewController, UITableViewDelegate {
                     button?.setTitleColor(selectedColor, for: .normal)
                     button?.backgroundColor = .white
                 }
-                
                 
                 switch sender {
                 case AllBtn:
@@ -125,19 +90,13 @@ class ResultViewController: UIViewController, UITableViewDelegate {
                 sender.backgroundColor = selectedColor
                 
                 CommentView.reloadData()
-                updateEmptyState()
             }
         }
-
-    func updateEmptyState() {
-        CommentView.backgroundView = comments.isEmpty ? emptyLabel : nil
-    }
     
 }
 
 extension ResultViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        updateEmptyState()
         
         return filteredComments.count
     }

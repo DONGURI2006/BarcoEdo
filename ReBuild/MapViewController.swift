@@ -1,14 +1,9 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController, MKMapViewDelegate/*, UICollectionViewDataSource*/{
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        <#code#>
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        <#code#>
-//    }
+class MapViewController: UIViewController, MKMapViewDelegate{
+    
+    @IBOutlet weak var MapComent: UICollectionView!
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -20,15 +15,15 @@ class MapViewController: UIViewController, MKMapViewDelegate/*, UICollectionView
     var commentLocations: [(latitude: Double, longitude: Double, rating:Int, text:String)] = []
     
     var isCircle: Bool = true {
-            didSet {
-                updateButtonTitle()
-                updateMap()
-            }
+        didSet {
+            updateButtonTitle()
+            updateMap()
         }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         print("こここ\(commentLocations)")
         mapView.delegate = self
         
@@ -175,9 +170,6 @@ class MapOverlayRenderer: MKOverlayRenderer {
                 //四角
                 context.fill(circleRect)
             }
-            
         }
-
     }
 }
-

@@ -1,0 +1,23 @@
+import UIKit
+
+class CommentCollectionCell: UICollectionViewCell {
+    @IBOutlet weak var commentLabel: UITextView!
+    
+    @IBOutlet weak var ComentBack: UIView!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        
+        ComentBack.layer.cornerRadius = 10
+        ComentBack.layer.borderWidth = 2
+        contentView.layer.borderColor = UIColor.systemGreen.cgColor
+        contentView.layer.masksToBounds = true
+    }
+    
+    func configure(comment: String) {
+        commentLabel.text = comment
+        
+        
+    }
+}
