@@ -68,30 +68,29 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate
     
     
     func updateButtonTitle() {
-        //ボタンの設定
-        var config = UIButton.Configuration.plain()
-        config.imagePadding = 4//画像と文字の余白
-        config.imagePlacement = .top//画像の位置
+            //ボタンの設定
+            var config = UIButton.Configuration.plain()
+            config.imagePadding = 4//画像と文字の余白
+            config.imagePlacement = .top//画像の位置
 
-        //画像、名前の設定
-        let title = isCircle ? "四角" : "丸"
-        let imageName = isCircle ? "Script1":"Ellipse1"
-        config.image = UIImage(named: imageName)
+            //画像、名前の設定
+            let title = isCircle ? "四角": "丸"
+            let imageName = isCircle ? "Script1":"Ellipse1"
+            config.image = UIImage(named: imageName)
 
 
-        var attributedTitle = AttributedString(title)
-        attributedTitle.font = UIFont(name: "LINE Seed JP App_OTF Regular", size: 8)
-        attributedTitle.foregroundColor = UIColor(red: 57/255, green: 72/255, blue: 102/255, alpha: 1) 
-        //文字色を指定
-        config.attributedTitle = attributedTitle
+            var attributedTitle = AttributedString(title)
+            attributedTitle.font = UIFont(name: "LINE Seed JP App_OTF Regular", size: 8)
+            attributedTitle.foregroundColor = UIColor(red: 57/255, green: 72/255, blue: 102/255, alpha: 1) // ← 文字色を指定
+            config.attributedTitle = attributedTitle
 
-        //背景色の設定
-        config.background.backgroundColor = .white
-        config.background.strokeColor = .black
-        config.background.strokeWidth = 1
+            //背景色の設定
+            config.background.backgroundColor = .white
+            config.background.strokeColor = .black
+            config.background.strokeWidth = 1
 
-        OnOffBtn.configuration = config
-    }
+            OnOffBtn.configuration = config
+         }
 
     func updateMap() {
         guard !commentLocations.isEmpty else {

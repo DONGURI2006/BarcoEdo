@@ -25,6 +25,7 @@ class CommentMapViewController: UIViewController {
     @IBOutlet weak var commentContainer: UIView!
     @IBOutlet weak var mapContainer: UIView!
     
+    @IBOutlet weak var NewProductName: UILabel!
     @IBOutlet weak var commentButton: UIButton!
     @IBOutlet weak var mapButton: UIButton!
     
@@ -140,6 +141,8 @@ class CommentMapViewController: UIViewController {
     
     
     func updateEmbeddedControllers() {
+        
+            NewProductName.text = productName
             resultVC?.productName = productName
             resultVC?.comments = comments
             resultVC?.CommentView.reloadData()
