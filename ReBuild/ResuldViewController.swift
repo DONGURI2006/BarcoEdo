@@ -18,11 +18,19 @@ class ResultViewController: UIViewController, UITableViewDelegate {
     var latitude: Double?
     var longitude: Double?
 
-    var comments: [CommentData] = []
     var filteredComments: [CommentData] = []
     
     var expandedIndexPaths: Set<IndexPath> = []
 
+    var selectedRating: Int? = nil
+    
+    var comments: [CommentData] = [] {
+        didSet {
+            filteredComments = comments.reversed()
+            CommentView?.reloadData()
+        }
+    }
+    
     @IBOutlet weak var CommentView: UITableView!
     
     override func viewDidLoad() {
@@ -38,25 +46,28 @@ class ResultViewController: UIViewController, UITableViewDelegate {
         CommentView.dataSource = self
         CommentView.delegate = self
         
+        AllBtn.setTitleColor(.white, for: .normal)
+        AllBtn.backgroundColor = selectedColor
+        selectedRating = nil
+        
         CommentView.rowHeight = UITableView.automaticDimension
         CommentView.estimatedRowHeight = 60
         
-        
+        filteredComments = comments.reversed()
+        CommentView.reloadData()
     }
     
-    var selectedRating: Int? = nil
-
-        @IBAction func ValueBtn(_ sender: UIButton)
+    @IBAction func ValueBtn(_ sender: UIButton)
         {
+            
             selectedRating = sender.tag
 
             let selectedColor = UIColor(red: 115/255, green: 173/255, blue: 57/255, alpha: 1.0)
             let allButtons = [AllBtn,ValueBtn1, ValueBtn2, ValueBtn3, ValueBtn4]
             
-            
             for (index, button) in allButtons.enumerated() {
                 guard let button = button else { continue }
-                
+
                 let isSelected = (index == selectedRating)
                 
                 for button in allButtons {
@@ -80,11 +91,11 @@ class ResultViewController: UIViewController, UITableViewDelegate {
                 case ValueBtn4:
                     selectedRating = 3
                     filteredComments = comments.filter { $0.rating == 3 }.reversed()
+                    
                 default:
-                    break
+                    selectedRating = nil
+                    filteredComments = comments.reversed()
                 }
-
-                
                 
                 sender.setTitleColor(.white, for: .normal)
                 sender.backgroundColor = selectedColor
@@ -142,6 +153,8 @@ extension ResultViewController: UITableViewDataSource {
     }
     
 }
+
+
 extension ResultViewController: CommentCellDelegate {
     func didTapExpandButton(in cell: CommentCell) {
         if let indexPath = CommentView.indexPath(for: cell) {

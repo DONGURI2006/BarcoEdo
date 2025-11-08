@@ -370,7 +370,7 @@
                     <color key="backgroundColor" red="0.88627451660000001" green="0.93333333730000001" blue="0.83137255909999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                 </view>
             </objects>
-            <point key="canvasLocation" x="2782.608695652174" y="125.89285714285714"/>
+            <point key="canvasLocation" x="2783" y="173"/>
         </scene>
         <!--Coment Controller-->
         <scene sceneID="jTa-rs-jOM">
