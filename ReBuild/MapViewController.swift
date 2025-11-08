@@ -128,6 +128,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate
             print("コメント内容: \(data.text)")
             ComentTextView.alpha = 1.0
             ComentTextView.text = data.text
+            ComentTextView.backgroundColor = UIColor(named: "white")
             ComentTextView.font = UIFont(name: "LINE Seed JP App_OTF Regular", size: 15)
             
             
