@@ -543,6 +543,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ReBuild/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "バーこえード";
 				INFOPLIST_KEY_NSCameraUsageDescription = "カメラを使用する";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "位置情報を取得する";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -575,6 +576,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ReBuild/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "バーこえード";
 				INFOPLIST_KEY_NSCameraUsageDescription = "カメラを使用する";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "位置情報を取得する";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
