@@ -131,8 +131,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate
             ComentTextView.backgroundColor = UIColor(named: "white")
             ComentTextView.font = UIFont(name: "LINE Seed JP App_OTF Regular", size: 15)
             
-            
-            
         }
     }
 

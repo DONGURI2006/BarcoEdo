@@ -26,10 +26,15 @@ class ResultViewController: UIViewController, UITableViewDelegate {
     
     var comments: [CommentData] = [] {
         didSet {
-            filteredComments = comments.reversed()
-            CommentView?.reloadData()
+            DispatchQueue.main.async {
+                self.filteredComments = self.selectedRating == nil
+                    ? self.comments.reversed()
+                    : self.comments.filter { $0.rating == self.selectedRating }.reversed()
+                self.CommentView.reloadData()
+            }
         }
     }
+
     
     @IBOutlet weak var CommentView: UITableView!
     
